@@ -1,0 +1,18 @@
+<div class="login-page">
+  <div class="form">
+    <form class="login-form">
+      <input type="text" placeholder="Ime"/>
+      <input type="text" placeholder="Prezime"/>
+      <input type="email" placeholder="Email"/>
+      <input type="password" placeholder="Sifra"/>
+      <input type="date" placeholder="Datum rodjenja"/>
+      <select (change)="onSelect($event)" class="selectClass">
+        <option *ngFor="let k of tipKorisnika"  [value] = "k">{{k}}</option> 
+      </select>
+      <div *ngIf="izabraniTip != 'Regularni korisnik'">
+        <input type="file" accept="image/*"/>
+      </div>
+      <button>Registracija</button>
+    </form>
+  </div>
+</div>

@@ -17,6 +17,9 @@ namespace WebApp.Persistence.UnitOfWork
             _context = context;
         }
 
+        [Dependency]
+        public IKartaRepository KartaRepository { get; set; }
+
         public int Complete()
         {
             return _context.SaveChanges();
@@ -24,7 +27,7 @@ namespace WebApp.Persistence.UnitOfWork
 
         public void Dispose()
         {
-            _context.Dispose();
+            _context.Dispose(); 
         }
     }
 }

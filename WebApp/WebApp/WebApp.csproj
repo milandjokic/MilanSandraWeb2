@@ -251,6 +251,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinijasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,6 +259,46 @@
     <Compile Include="Migrations\201905222056072_InitialMigration.cs" />
     <Compile Include="Migrations\201905222056072_InitialMigration.Designer.cs">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905280914437_KartaMigration.cs" />
+    <Compile Include="Migrations\201905280914437_KartaMigration.Designer.cs">
+      <DependentUpon>201905280914437_KartaMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905280918264_StavkaMigration.cs" />
+    <Compile Include="Migrations\201905280918264_StavkaMigration.Designer.cs">
+      <DependentUpon>201905280918264_StavkaMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905280919342_CenovnikMigration.cs" />
+    <Compile Include="Migrations\201905280919342_CenovnikMigration.Designer.cs">
+      <DependentUpon>201905280919342_CenovnikMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905280922104_AdministratorMigration.cs" />
+    <Compile Include="Migrations\201905280922104_AdministratorMigration.Designer.cs">
+      <DependentUpon>201905280922104_AdministratorMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905280922460_KontrolorMigration.cs" />
+    <Compile Include="Migrations\201905280922460_KontrolorMigration.Designer.cs">
+      <DependentUpon>201905280922460_KontrolorMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905280923300_DjakMigration.cs" />
+    <Compile Include="Migrations\201905280923300_DjakMigration.Designer.cs">
+      <DependentUpon>201905280923300_DjakMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905280924131_PenzionerMigration.cs" />
+    <Compile Include="Migrations\201905280924131_PenzionerMigration.Designer.cs">
+      <DependentUpon>201905280924131_PenzionerMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905280924497_RegularniKorisnikMigration.cs" />
+    <Compile Include="Migrations\201905280924497_RegularniKorisnikMigration.Designer.cs">
+      <DependentUpon>201905280924497_RegularniKorisnikMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281015181_CenovnikStavkaMigration.cs" />
+    <Compile Include="Migrations\201905281015181_CenovnikStavkaMigration.Designer.cs">
+      <DependentUpon>201905281015181_CenovnikStavkaMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281034242_LinijaMigration.cs" />
+    <Compile Include="Migrations\201905281034242_LinijaMigration.Designer.cs">
+      <DependentUpon>201905281034242_LinijaMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -275,9 +316,12 @@
     <Compile Include="Models\Penzioner.cs" />
     <Compile Include="Models\RegularniKorisnik.cs" />
     <Compile Include="Models\Stanica.cs" />
+    <Compile Include="Models\StanicaLinija.cs" />
     <Compile Include="Models\Stavka.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repository\IKartaRepository.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
+    <Compile Include="Persistence\Repository\KartaRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
     <Compile Include="Persistence\UnitOfWork\DemoUnitOfWork.cs" />
     <Compile Include="Persistence\UnitOfWork\IUnitOfWork.cs" />
@@ -381,6 +425,36 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905222056072_InitialMigration.resx">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280914437_KartaMigration.resx">
+      <DependentUpon>201905280914437_KartaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280918264_StavkaMigration.resx">
+      <DependentUpon>201905280918264_StavkaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280919342_CenovnikMigration.resx">
+      <DependentUpon>201905280919342_CenovnikMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280922104_AdministratorMigration.resx">
+      <DependentUpon>201905280922104_AdministratorMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280922460_KontrolorMigration.resx">
+      <DependentUpon>201905280922460_KontrolorMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280923300_DjakMigration.resx">
+      <DependentUpon>201905280923300_DjakMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280924131_PenzionerMigration.resx">
+      <DependentUpon>201905280924131_PenzionerMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280924497_RegularniKorisnikMigration.resx">
+      <DependentUpon>201905280924497_RegularniKorisnikMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281015181_CenovnikStavkaMigration.resx">
+      <DependentUpon>201905281015181_CenovnikStavkaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281034242_LinijaMigration.resx">
+      <DependentUpon>201905281034242_LinijaMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
