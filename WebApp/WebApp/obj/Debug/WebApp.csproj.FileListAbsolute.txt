@@ -304,3 +304,4 @@ C:\Users\e399-2015\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.csproj
 C:\Users\e399-2015\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\e399-2015\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.pdb
 C:\Users\e399-2015\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.Migrations.CenovnikStavkaMigration.resources
+C:\Users\e399-2015\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.Migrations.LinijaMigration.resources

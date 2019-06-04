@@ -5,6 +5,10 @@ import { Validators } from '@angular/forms';
 import { validateConfig } from '@angular/router/src/config';
 import { FormGroup } from '@angular/forms/src/model';
 
+import { RegisterServiceService } from '../services/register-service.service';
+
+import { Djak, Penzioner, RegularniKorisnik } from '../classes';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -26,7 +30,9 @@ export class RegisterComponent implements OnInit {
 
   izabraniTip = 'Djak';
 
-  constructor(private fb: FormBuilder) { }
+  djak: Djak = new Djak();
+
+  constructor(private fb: FormBuilder, private service: RegisterServiceService) { }
 
   checkPassword(group:FormGroup){
       let pass = group.controls.password.value;
@@ -36,6 +42,7 @@ export class RegisterComponent implements OnInit {
 
   }
   ngOnInit() {
+    
   }
 
   onSelect(event : any)
@@ -45,7 +52,15 @@ export class RegisterComponent implements OnInit {
 
   onSubmit()
   {
-    console.log(this.registerForm.value.name + " " + this.registerForm.value.lastname + " " + this.izabraniTip)
+    console.log(this.registerForm.value.name + " " + this.registerForm.value.lastname + " " + this.izabraniTip);
+    this.registerDjak();
+    console.log(this.djak.Ime);
+  }
+
+  registerDjak()
+  {
+    this.djak.Ime = this.registerForm.controls.name.value;
+    //this.service.registerDjak(this.djak).subscribe(djak => {this.djak});
   }
 
 }
