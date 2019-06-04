@@ -1,0 +1,13 @@
+<br>
+<br>
+<div class="form">
+<select name="tipKarte" class="form-control" (change)="onSelectKarta($event)" class="selectClass">
+  <option *ngFor="let karta of tipKarte" [value]="karta">{{karta}}</option>
+</select>
+<select name="tipKorisnika" class="form-control" (change)="onSelectKorisnik($event)" class="selectClass">
+  <option *ngFor="let korisnik of tipKorisnika" [value]="korisnik">{{korisnik}}</option>
+</select>
+{{izabranaKarta}}
+<br>
+{{izabraniKorisnik}}
+</div>

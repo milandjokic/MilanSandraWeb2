@@ -2,8 +2,18 @@
   <div class="form">
     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-            <input type="email" formControlName="email" placeholder="email" required>
-            <input type="password" formControlName="password" placeholder="password" required>
+            <input type="email" formControlName="email" placeholder="email" name="email" [ngClass]="{'is-invalid': submitted && f.email.errors}"/>
+            <div *ngIf="f.email.errors" class="invalid-feedback"> 
+            <div *ngIf="f.email.errors.required && (f.email.dirty || f.email.touched)">
+              Popunjavanje email polja je obavezno!
+            </div>  
+            </div>
+            <input type="password" formControlName="password" placeholder="password" name="password"  [ngClass]="{'is-invalid': submitted && f.password.errors}">
+            <div *ngIf="f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required && (f.password.dirty || f.password.touched)">
+                Popunjavanje sifre je obavezno!
+              </div>
+            </div>
       <button type="submit" [disabled]="!loginForm.valid">Logovanje</button>
     </form>
   </div>
