@@ -12,4 +12,11 @@ namespace WebApp.Models
         MesecnaKarta = 2,
         GodisnjaKarta = 3,
     }
+
+    public enum TipKorisnika
+    {
+        Djak = 0,
+        Penzioner = 1,
+        RegularniKorisnik = 2,
+    }
 }

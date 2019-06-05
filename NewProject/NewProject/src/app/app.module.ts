@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CenovnikComponent } from './cenovnik/cenovnik.component';
+import { KarteComponent } from './karte/karte.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CenovnikComponent } from './cenovnik/cenovnik.component';
     LoginComponent,
     RegisterComponent,
     NavBarComponent,
-    CenovnikComponent
+    CenovnikComponent,
+    KarteComponent
   ],
   imports: [
     BrowserModule,

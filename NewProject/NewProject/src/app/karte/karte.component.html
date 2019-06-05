@@ -1,0 +1,9 @@
+<div>
+  <form class="login-form" [formGroup]="karteForm" (ngSubmit)="onSubmit()">
+    <label>Izaberite kartu</label>
+    <select formControlName="typeOfCard" (change)="onSelect($event)" class="selectClass">
+      <option *ngFor="let k of tipKarte"  [value] = "k">{{k}}</option> 
+    </select>
+    <button type="submit" [disabled]="!karteForm.valid">Kupi</button>
+  </form>
+</div>

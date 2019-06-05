@@ -22,6 +22,8 @@ namespace WebApp.Persistence
         public DbSet<Linija> Linija { get; set; }
         public DbSet<Stanica> Stanica { get; set; }
         public DbSet<CenovnikStavka> CenovnikStavka { get; set; }
+        public DbSet<Koeficijent> Koeficijent { get; set; }
+        public DbSet<KorisnikKarta> KorisnikKarta { get; set; }
 
 
         public ApplicationDbContext()

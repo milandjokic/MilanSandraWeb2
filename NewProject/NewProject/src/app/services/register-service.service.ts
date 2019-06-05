@@ -22,4 +22,14 @@ export class RegisterServiceService {
   {
     return this.http.post<Djak>(this.registerDjaksURL, djak, httpOptions);
   }
+
+  registerPenzioner(penzioner: Penzioner) : Observable<Penzioner>
+  {
+    return this.http.post<Penzioner>(this.registerPenzionersURL, penzioner, httpOptions);
+  }
+
+  registerRegularniKorisnik(regularniKorisnik: RegularniKorisnik) : Observable<RegularniKorisnik>
+  {
+    return this.http.post<RegularniKorisnik>(this.registerRegularniKorisniksURL, regularniKorisnik, httpOptions);
+  }
 }

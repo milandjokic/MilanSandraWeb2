@@ -24,13 +24,22 @@ export class RegisterComponent implements OnInit {
     password : ['', [Validators.required, Validators.minLength(8)]],
     passwordRep : ['', [Validators.required, Validators.minLength(8)]],
     dateOfBirth : ['', Validators.required],
-    image : ['']
+    address : ['', Validators.required],
+    image : [''],
+    typeOfUser : ['', Validators.required]
 
   }, {validator: this.checkPassword});
 
-  izabraniTip = 'Djak';
+  izabraniTip = 'Regularni korisnik';
 
   djak: Djak = new Djak();
+  djaks: Djak[] = [];
+
+  penzioner: Penzioner = new Penzioner();
+  penzioners: Penzioner[] = [];
+
+  regularniKorisnik: RegularniKorisnik = new RegularniKorisnik();
+  regularniKorisniks: RegularniKorisnik[] = [];
 
   constructor(private fb: FormBuilder, private service: RegisterServiceService) { }
 
@@ -52,15 +61,61 @@ export class RegisterComponent implements OnInit {
 
   onSubmit()
   {
-    console.log(this.registerForm.value.name + " " + this.registerForm.value.lastname + " " + this.izabraniTip);
-    this.registerDjak();
-    console.log(this.djak.Ime);
+    if(this.registerForm.controls.typeOfUser.value === 'Djak')
+    {
+      this.addDjak();
+    }
+    else if(this.registerForm.controls.typeOfUser.value === 'Penzioner')
+    {
+      this.addPenzioner();
+    }
+    else
+    {
+      this.addRegularniKorisnik();
+    }
   }
 
-  registerDjak()
+  addDjak()
   {
     this.djak.Ime = this.registerForm.controls.name.value;
-    //this.service.registerDjak(this.djak).subscribe(djak => {this.djak});
+    this.djak.Prezime = this.registerForm.controls.lastname.value;
+    this.djak.Adresa = this.registerForm.controls.address.value;
+    this.djak.Lozinka = this.registerForm.controls.password.value;
+    this.djak.Email = this.registerForm.controls.email.value;
+    this.djak.DatumRodjenja = this.registerForm.controls.dateOfBirth.value;
+    this.djak.Slika = this.registerForm.controls.image.value;
+
+    //console.log(`${this.djak.Ime} ${this.djak.Prezime} ${this.djak.Adresa} ${this.djak.DatumRodjenja}`);
+    this.service.registerDjak(this.djak).subscribe(djak => {this.djaks.push(djak);
+    });
   }
 
+  addPenzioner()
+  {
+    this.penzioner.Ime = this.registerForm.controls.name.value;
+    this.penzioner.Prezime = this.registerForm.controls.lastname.value;
+    this.penzioner.Adresa = this.registerForm.controls.address.value;
+    this.penzioner.Lozinka = this.registerForm.controls.password.value;
+    this.penzioner.Email = this.registerForm.controls.email.value;
+    this.penzioner.DatumRodjenja = this.registerForm.controls.dateOfBirth.value;
+    this.penzioner.Slika = this.registerForm.controls.image.value;
+
+    this.service.registerPenzioner(this.penzioner).subscribe(penzioner => {this.penzioners.push(penzioner);
+    });
+
+  }
+
+  addRegularniKorisnik()
+  {
+    this.regularniKorisnik.Ime = this.registerForm.controls.name.value;
+    this.regularniKorisnik.Prezime = this.registerForm.controls.lastname.value;
+    this.regularniKorisnik.Adresa = this.registerForm.controls.address.value;
+    this.regularniKorisnik.Lozinka = this.registerForm.controls.password.value;
+    this.regularniKorisnik.Email = this.registerForm.controls.email.value;
+    this.regularniKorisnik.DatumRodjenja = this.registerForm.controls.dateOfBirth.value;
+    
+    this.service.registerRegularniKorisnik(this.regularniKorisnik).subscribe(regularniKorisnik => {this.regularniKorisniks.push(regularniKorisnik);
+    });
+
+  }
 }
