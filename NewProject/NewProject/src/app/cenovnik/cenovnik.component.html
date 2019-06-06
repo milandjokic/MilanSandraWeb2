@@ -7,7 +7,14 @@
 <select name="tipKorisnika" class="form-control" (change)="onSelectKorisnik($event)" class="selectClass">
   <option *ngFor="let korisnik of tipKorisnika" [value]="korisnik">{{korisnik}}</option>
 </select>
-{{izabranaKarta}}
 <br>
-{{izabraniKorisnik}}
+{{izabranaKarta}}
+<span>
+  {{izabraniKorisnik}}
+
+</span>
+<br>
+<label>Cena karte: </label>
+<span>{{cena}}</span>
+<span>rsd</span>
 </div>

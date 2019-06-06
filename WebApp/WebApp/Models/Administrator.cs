@@ -7,5 +7,6 @@ namespace WebApp.Models
 {
     public class Administrator : Korisnik
     {
+
     }
 }

@@ -17,6 +17,6 @@ namespace WebApp.Models
     {
         Djak = 0,
         Penzioner = 1,
-        RegularniKorisnik = 2,
+        Regularan= 2,
     }
 }

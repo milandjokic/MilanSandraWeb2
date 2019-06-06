@@ -9,6 +9,6 @@ namespace WebApp.Models
     {
         public int Id { get; set; }
         public TipKorisnika TipKorisnika { get; set; }
-        public float Koef { get; set; }
+        public double Koef { get; set; }
     }
 }

@@ -250,8 +250,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CenovniksController.cs" />
     <Compile Include="Controllers\DjaksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KartasController.cs" />
+    <Compile Include="Controllers\KoeficijentsController.cs" />
     <Compile Include="Controllers\LinijasController.cs" />
     <Compile Include="Controllers\PenzionersController.cs" />
     <Compile Include="Controllers\RegularniKorisniksController.cs" />
@@ -310,6 +313,14 @@
     <Compile Include="Migrations\201906051033045_KorisnikKarta.cs" />
     <Compile Include="Migrations\201906051033045_KorisnikKarta.Designer.cs">
       <DependentUpon>201906051033045_KorisnikKarta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906060934315_Korisniks.cs" />
+    <Compile Include="Migrations\201906060934315_Korisniks.Designer.cs">
+      <DependentUpon>201906060934315_Korisniks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906060944124_KoeficijentKoef.cs" />
+    <Compile Include="Migrations\201906060944124_KoeficijentKoef.Designer.cs">
+      <DependentUpon>201906060944124_KoeficijentKoef.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -474,6 +485,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906051033045_KorisnikKarta.resx">
       <DependentUpon>201906051033045_KorisnikKarta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906060934315_Korisniks.resx">
+      <DependentUpon>201906060934315_Korisniks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906060944124_KoeficijentKoef.resx">
+      <DependentUpon>201906060944124_KoeficijentKoef.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
