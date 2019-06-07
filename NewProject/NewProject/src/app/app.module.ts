@@ -20,7 +20,8 @@ import { KarteComponent } from './karte/karte.component';
     RegisterComponent,
     NavBarComponent,
     CenovnikComponent,
-    KarteComponent
+    KarteComponent,
+
   ],
   imports: [
     BrowserModule,

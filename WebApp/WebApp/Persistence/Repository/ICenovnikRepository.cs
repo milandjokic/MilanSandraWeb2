@@ -7,8 +7,8 @@ using WebApp.Models;
 
 namespace WebApp.Persistence.Repository
 {
-    public interface IKartaRepository : IRepository<Karta, int>
+    public interface ICenovnikRepository : IRepository<Cenovnik, int>
     {
-
+        double CenaKarte(TipKorisnika tipKorisnika, VrstaKarte vrstaKarte);
     }
 }

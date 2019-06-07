@@ -8,13 +8,13 @@
               Popunjavanje email polja je obavezno!
             </div>  
             </div>
-            <input type="password" formControlName="password" placeholder="password" name="password"  [ngClass]="{'is-invalid': submitted && f.password.errors}">
+            <input type="password" formControlName="password" placeholder="sifra" name="password"  [ngClass]="{'is-invalid': submitted && f.password.errors}">
             <div *ngIf="f.password.errors" class="invalid-feedback">
               <div *ngIf="f.password.errors.required && (f.password.dirty || f.password.touched)">
                 Popunjavanje sifre je obavezno!
               </div>
             </div>
-      <button type="submit" [disabled]="!loginForm.valid">Logovanje</button>
+      <button type="submit" [disabled]="!loginForm.valid">Prijava</button>
     </form>
   </div>
 </div>

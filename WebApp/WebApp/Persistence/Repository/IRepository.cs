@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using System.Data.Entity;
 
 namespace WebApp.Persistence.Repository
 {
@@ -18,7 +19,9 @@ namespace WebApp.Persistence.Repository
 
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
-
+        void SaveChanges();
+        void Entry(TEntity entity, EntityState state);
+        void Dispose();
         void Update(TEntity entity);
     }
 }

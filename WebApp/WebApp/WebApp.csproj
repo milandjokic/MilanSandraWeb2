@@ -343,6 +343,8 @@
     <Compile Include="Models\StanicaLinija.cs" />
     <Compile Include="Models\Stavka.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repository\CenovnikRepository.cs" />
+    <Compile Include="Persistence\Repository\ICenovnikRepository.cs" />
     <Compile Include="Persistence\Repository\IKartaRepository.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
     <Compile Include="Persistence\Repository\KartaRepository.cs" />

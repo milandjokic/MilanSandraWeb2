@@ -25,6 +25,16 @@ namespace WebApp.Persistence.Repository
             context.Set<TEntity>().AddRange(entities);
         }
 
+        public void Dispose()
+        {
+            context.Dispose();
+        }
+
+        public void Entry(TEntity entity, EntityState state)
+        {
+            context.Entry(entity).State = state;
+        }
+
         public IEnumerable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
             return context.Set<TEntity>().Where(predicate);
@@ -48,6 +58,11 @@ namespace WebApp.Persistence.Repository
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             context.Set<TEntity>().RemoveRange(entities);
+        }
+
+        public void SaveChanges()
+        {
+            context.SaveChanges();
         }
 
         public void Update(TEntity entity)

@@ -1,4 +1,6 @@
-<div>
+<br>
+<br>
+<div class="form">
   <form class="login-form" [formGroup]="karteForm" (ngSubmit)="onSubmit()">
     <label>Izaberite kartu</label>
     <select formControlName="typeOfCard" (change)="onSelect($event)" class="selectClass">

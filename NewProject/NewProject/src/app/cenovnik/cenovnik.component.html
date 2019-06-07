@@ -1,20 +1,24 @@
 <br>
 <br>
 <div class="form">
+  <h3>Cenovnik</h3>
 <select name="tipKarte" class="form-control" (change)="onSelectKarta($event)" class="selectClass">
   <option *ngFor="let karta of tipKarte" [value]="karta">{{karta}}</option>
 </select>
 <select name="tipKorisnika" class="form-control" (change)="onSelectKorisnik($event)" class="selectClass">
   <option *ngFor="let korisnik of tipKorisnika" [value]="korisnik">{{korisnik}}</option>
 </select>
-<br>
+<!--<br>
 {{izabranaKarta}}
 <span>
   {{izabraniKorisnik}}
 
-</span>
+</span>!-->
 <br>
-<label>Cena karte: </label>
-<span>{{cena}}</span>
-<span>rsd</span>
+<div class="labela">
+  <label>Cena karte: </label>
+  <span>{{cena}}</span>
+  <span>rsd</span>
+
+</div>
 </div>

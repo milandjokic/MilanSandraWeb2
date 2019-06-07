@@ -9,6 +9,7 @@ namespace WebApp.Persistence.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
+        ICenovnikRepository CenovnikRepository {get;}
         int Complete();
     }
 }

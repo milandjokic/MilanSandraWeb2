@@ -10,24 +10,31 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using WebApp.Models;
 using WebApp.Persistence;
+using WebApp.Persistence.UnitOfWork;
 
 namespace WebApp.Controllers
 {
     public class CenovniksController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        public IUnitOfWork UnitOfWork { get; set; }
+
+        public CenovniksController(IUnitOfWork unitOfWork)
+        {
+            UnitOfWork = unitOfWork;
+        }
 
         // GET: api/Cenovniks
         public IQueryable<Cenovnik> GetCenovnik()
         {
-            return db.Cenovnik;
+            return UnitOfWork.CenovnikRepository.GetAll().AsQueryable();
         }
 
         // GET: api/Cenovniks/5
         [ResponseType(typeof(Cenovnik))]
         public IHttpActionResult GetCenovnik(int id)
         {
-            Cenovnik cenovnik = db.Cenovnik.Find(id);
+            Cenovnik cenovnik = UnitOfWork.CenovnikRepository.Get(id);
             if (cenovnik == null)
             {
                 return NotFound();
@@ -50,11 +57,12 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
 
-            db.Entry(cenovnik).State = EntityState.Modified;
+            //db.Entry(cenovnik).State = EntityState.Modified;
+            UnitOfWork.CenovnikRepository.Entry(cenovnik, EntityState.Modified);
 
             try
             {
-                db.SaveChanges();
+                UnitOfWork.CenovnikRepository.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -80,8 +88,10 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Cenovnik.Add(cenovnik);
-            db.SaveChanges();
+            UnitOfWork.CenovnikRepository.Add(cenovnik);
+            UnitOfWork.CenovnikRepository.SaveChanges();
+           // db.Cenovnik.Add(cenovnik);
+            //db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = cenovnik.Id }, cenovnik);
         }
@@ -90,14 +100,14 @@ namespace WebApp.Controllers
         [ResponseType(typeof(Cenovnik))]
         public IHttpActionResult DeleteCenovnik(int id)
         {
-            Cenovnik cenovnik = db.Cenovnik.Find(id);
+            Cenovnik cenovnik = UnitOfWork.CenovnikRepository.Get(id);
             if (cenovnik == null)
             {
                 return NotFound();
             }
 
-            db.Cenovnik.Remove(cenovnik);
-            db.SaveChanges();
+            UnitOfWork.CenovnikRepository.Remove(cenovnik);
+            UnitOfWork.CenovnikRepository.SaveChanges();
 
             return Ok(cenovnik);
         }
@@ -106,28 +116,22 @@ namespace WebApp.Controllers
         [ResponseType(typeof(double))]
         public IHttpActionResult GetCenaKarte(VrstaKarte vrstaKarte, TipKorisnika tipKorisnika)
         {
-            int idCenovnik = db.Cenovnik.Where(c => c.Aktivan == true).Select(c => c.Id).First();
-            int idStavka = db.Stavka.Where(s => s.VrstaKarte == vrstaKarte).Select(s => s.Id).First();
 
-            double cena = db.CenovnikStavka.Where(cs => cs.IdCenovnik == idCenovnik && cs.IdStavka == idStavka).Select(cs => cs.Cena).First();
-
-            double koef = db.Koeficijent.Where(k => k.TipKorisnika == tipKorisnika).Select(k => k.Koef).First();
-
-            return Ok(Math.Round(cena * koef));
+            return Ok(UnitOfWork.CenovnikRepository.CenaKarte(tipKorisnika, vrstaKarte));
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                UnitOfWork.CenovnikRepository.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool CenovnikExists(int id)
         {
-            return db.Cenovnik.Count(e => e.Id == id) > 0;
+            return UnitOfWork.CenovnikRepository.GetAll().Count(e => e.Id == id) > 0;
         }
     }
 }

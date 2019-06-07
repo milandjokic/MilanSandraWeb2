@@ -19,6 +19,8 @@ namespace WebApp.Persistence.UnitOfWork
 
         [Dependency]
         public IKartaRepository KartaRepository { get; set; }
+        [Dependency]
+        public ICenovnikRepository CenovnikRepository { get; set; }
 
         public int Complete()
         {
