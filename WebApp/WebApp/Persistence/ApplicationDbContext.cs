@@ -15,6 +15,7 @@ namespace WebApp.Persistence
         public DbSet<Item> Items { get; set; }
         public DbSet<Coefficient> Coefficients { get; set; }
         public DbSet<PricelistItem> PricelistItems { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

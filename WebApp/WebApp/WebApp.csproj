@@ -267,6 +267,10 @@
     <Compile Include="Migrations\201906101537201_Second.Designer.cs">
       <DependentUpon>201906101537201_Second.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906101901185_Third.cs" />
+    <Compile Include="Migrations\201906101901185_Third.Designer.cs">
+      <DependentUpon>201906101901185_Third.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -276,6 +280,7 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Pricelist.cs" />
     <Compile Include="Models\PricelistItem.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
@@ -387,6 +392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906101537201_Second.resx">
       <DependentUpon>201906101537201_Second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101901185_Third.resx">
+      <DependentUpon>201906101901185_Third.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

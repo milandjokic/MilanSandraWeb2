@@ -3,9 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { LoginServiceService } from '../services/login-service.service';
 
 import { Djak, Penzioner, RegularniKorisnik } from '../classes';
+import { AuthenticationService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,37 +22,45 @@ export class LoginComponent implements OnInit {
   penzioners: Penzioner[] = [];
   regularniKorisniks: RegularniKorisnik[] = [];
 
-  constructor(private fb: FormBuilder, private service: LoginServiceService) { }
+  constructor(private fb: FormBuilder, private service: AuthenticationService) { }
 
   get f()
   {
     return this.loginForm.controls;
   }
   ngOnInit() {
-    this.getDjaks();
-    this.getPenzioners();
-    this.getRegularniKorisniks();
+    
   }
   onSubmit()
   {
     console.log(this.loginForm.value.email + " " + this.loginForm.value.password);
-    
-
-    console.log(this.djaks[0]);
-    console.log(this.penzioners[0]);
-    console.log(this.regularniKorisniks[0]);
+    this.onSignIn(this.loginForm.value.email,  this.loginForm.value.password);
   }
 
-  getDjaks(): void{
-    this.service.getDjaks().subscribe(djaks => this.djaks = djaks);
-  }
 
-  getPenzioners(): void{
-    this.service.getPenzioners().subscribe(penzioners => this.penzioners = penzioners);
-  }
+  onSignIn(email : string, password : string){
+    this.service.signIn(email,password).subscribe(
+      res => {
+        console.log(res.access_token);
 
-  getRegularniKorisniks(): void{
-    this.service.getRegularniKorisniks().subscribe(regularniKorisniks => this.regularniKorisniks = regularniKorisniks);
+        let jwt = res.access_token;
+        let jwtData = jwt.split('.')[1]
+        let decodedJwtJasonData = window.atob(jwtData)
+        let decodetJwtData = JSON.parse(decodedJwtJasonData)
+
+        let role = decodetJwtData.role
+
+        console.log('jwtData: ' + jwtData)
+        console.log('decodedJwtJsonData: ' + decodedJwtJasonData)
+        console.log(decodetJwtData)
+        console.log('Role: ' + role)
+        let a = decodetJwtData.unique_name
+        localStorage.setItem('jwt', jwt)
+        localStorage.setItem('role', role)
+        localStorage.setItem('name',a);
+        window.location.href = "/cenovnik"
+      }
+    );
   }
 
 }
