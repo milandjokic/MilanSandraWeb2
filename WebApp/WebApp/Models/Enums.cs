@@ -5,18 +5,18 @@ using System.Web;
 
 namespace WebApp.Models
 {
-    public enum VrstaKarte
+    public enum UserType
     {
-        VremenskaKarta = 0,
-        DnevnaKarta = 1,
-        MesecnaKarta = 2,
-        GodisnjaKarta = 3,
+        RegularUser = 0,
+        Student = 1,
+        Pensioner = 2
     }
 
-    public enum TipKorisnika
+    public enum TicketType
     {
-        Djak = 0,
-        Penzioner = 1,
-        Regularan= 2,
+        TimeTicket = 0,
+        DayTicket = 1,
+        MonthTicket = 2,
+        YearTicket = 3
     }
 }

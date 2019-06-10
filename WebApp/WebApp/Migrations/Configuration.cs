@@ -60,11 +60,144 @@ namespace WebApp.Migrations
             }
 
             if (!context.Users.Any(u => u.UserName == "appu@yahoo.com"))
-            { 
+            {
                 var user = new ApplicationUser() { Id = "appu", UserName = "appu@yahoo.com", Email = "appu@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Appu123!") };
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "AppUser");
             }
+
+            if (!context.Users.Any(u => u.UserName == "pera@yahoo.com"))
+            {
+                var user = new ApplicationUser()
+                {
+                    UserName = "pera@yahoo.com",
+                    Email = "pera@yahoo.com",
+                    PasswordHash = ApplicationUser.HashPassword("perasifra"),
+                    Name = "Petar",
+                    Lastname = "Peric",
+                    DateOfBirth = new DateTime(1996, 3, 25),
+                    Image = "",
+                    UserType = UserType.RegularUser,
+                    Address = "Dinka Simunovica 88",
+                    Activated = true
+                };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "AppUser");
+            }
+
+            if (!context.Items.Any(i => i.TicketType == TicketType.TimeTicket))
+            {
+                var item = new Item()
+                {
+                    TicketType = TicketType.TimeTicket
+                };
+                context.Items.Add(item);
+            }
+
+            if (!context.Items.Any(i => i.TicketType == TicketType.DayTicket))
+            {
+                var item = new Item()
+                {
+                    TicketType = TicketType.DayTicket
+                };
+                context.Items.Add(item);
+            }
+
+            if (!context.Items.Any(i => i.TicketType == TicketType.MonthTicket))
+            {
+                var item = new Item()
+                {
+                    TicketType = TicketType.MonthTicket
+                };
+                context.Items.Add(item);
+            }
+
+            if (!context.Items.Any(i => i.TicketType == TicketType.YearTicket))
+            {
+                var item = new Item()
+                {
+                    TicketType = TicketType.YearTicket
+                };
+                context.Items.Add(item);
+            }
+
+            if(!context.Pricelists.Any(p => p.Active == true))
+            {
+                var pricelist = new Pricelist()
+                {
+                    Start = new DateTime(2019, 1, 1),
+                    End = new DateTime(2019, 12, 31),
+                    Active = true
+                };
+                context.Pricelists.Add(pricelist);
+            }
+
+            if(!context.Coefficients.Any(c => c.UserType == UserType.RegularUser))
+            {
+                var coefRegular = new Coefficient()
+                {
+                    UserType = UserType.RegularUser,
+                    Coef = 1
+                };
+                context.Coefficients.Add(coefRegular);
+            }
+
+            if(!context.Coefficients.Any(c => c.UserType == UserType.Student))
+            {
+                var coefStudent = new Coefficient()
+                {
+                    UserType = UserType.Student,
+                    Coef = 0.8
+                };
+                context.Coefficients.Add(coefStudent);
+            }
+
+            if(!context.Coefficients.Any(c => c.UserType == UserType.Pensioner))
+            {
+                var coefPensioner = new Coefficient()
+                {
+                    UserType = UserType.Pensioner,
+                    Coef = 0.6
+                };
+                context.Coefficients.Add(coefPensioner);
+            }
+
+            var priceOfTimeTicket = 65;
+            var priceOfDayTicket = 100;
+            var priceOfMonthTicket = 1000;
+            var priceOfYearTicket = 5500;
+
+            //foreach(var pricelist in context.Pricelists)
+            //{
+            //    foreach(var item in context.Items)
+            //    {
+            //        var pricelistItem = new PricelistItem()
+            //        {
+            //            IdPricelist = pricelist.Id,
+            //            IdItem = item.Id,
+            //            Price = 0
+            //        };
+
+            //        if(item.TicketType == TicketType.TimeTicket)
+            //        {
+            //            pricelistItem.Price = priceOfTimeTicket;
+            //        }
+            //        else if(item.TicketType == TicketType.DayTicket)
+            //        {
+            //            pricelistItem.Price = priceOfDayTicket;
+            //        }
+            //        else if (item.TicketType == TicketType.MonthTicket)
+            //        {
+            //            pricelistItem.Price = priceOfMonthTicket;
+            //        }
+            //        else
+            //        {
+            //            pricelistItem.Price = priceOfYearTicket;
+            //        }
+
+            //        context.PricelistItems.Add(pricelistItem);
+            //    }
+            //}
         }
     }
 }
