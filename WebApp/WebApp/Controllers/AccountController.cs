@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -14,6 +15,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApp.Models;
+using WebApp.Persistence;
 using WebApp.Providers;
 using WebApp.Results;
 
@@ -323,14 +325,33 @@ namespace WebApp.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        Name = model.Name,
+                        Lastname = model.Lastname,
+                        Address = model.Address,
+                        DateOfBirth = model.DateOfBirth,
+                        UserType = model.UserType,
+                        
+
+            };
+
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            result = await UserManager.AddToRoleAsync(user.Id, "AppUser");
 
             if (!result.Succeeded)
             {

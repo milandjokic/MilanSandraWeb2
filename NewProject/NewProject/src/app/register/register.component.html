@@ -6,9 +6,9 @@
       <input formControlName="address" type="text" placeholder="Adresa"/>
       <input formControlName="email" type="email" placeholder="Email"/>
       <input formControlName="password" type="password" placeholder="Sifra" name = "password"/>
-      <input formControlName="passwordRep" type="password" placeholder="Potvrdite sifru" name="passwordRep"/>
+      <input formControlName="confirmPassword" type="password" placeholder="Potvrdite sifru" name="confirmPassword"/>
       <input formControlName="dateOfBirth" type="date" placeholder="Datum rodjenja"/>
-      <select formControlName="typeOfUser" (change)="onSelect($event)" class="selectClass">
+      <select formControlName="userType" (change)="onSelect($event)" class="selectClass">
         <option *ngFor="let k of tipKorisnika"  [value] = "k">{{k}}</option> 
       </select>
       <div *ngIf="izabraniTip != 'Regularni korisnik'">

@@ -6,8 +6,7 @@ import { validateConfig } from '@angular/router/src/config';
 import { FormGroup } from '@angular/forms/src/model';
 
 import { RegisterServiceService } from '../services/register-service.service';
-
-import { Djak, Penzioner, RegularniKorisnik } from '../classes';
+import { AuthenticationService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,36 +15,27 @@ import { Djak, Penzioner, RegularniKorisnik } from '../classes';
 })
 export class RegisterComponent implements OnInit {
 
-  tipKorisnika = ['Djak', 'Penzioner', 'Regularni korisnik'];
+  tipKorisnika = ['Student', 'Pensioner', 'RegularUser'];
   registerForm = this.fb.group({
     name : ['', Validators.required],
     lastname : ['', Validators.required],
     email : ['', Validators.required],
     password : ['', [Validators.required, Validators.minLength(8)]],
-    passwordRep : ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword : ['', [Validators.required, Validators.minLength(8)]],
     dateOfBirth : ['', Validators.required],
     address : ['', Validators.required],
     image : [''],
-    typeOfUser : ['', Validators.required]
+    userType : ['', Validators.required]
 
   }, {validator: this.checkPassword});
 
-  izabraniTip = 'Regularni korisnik';
+  izabraniTip = 'RegularUser';
 
-  djak: Djak = new Djak();
-  djaks: Djak[] = [];
-
-  penzioner: Penzioner = new Penzioner();
-  penzioners: Penzioner[] = [];
-
-  regularniKorisnik: RegularniKorisnik = new RegularniKorisnik();
-  regularniKorisniks: RegularniKorisnik[] = [];
-
-  constructor(private fb: FormBuilder, private service: RegisterServiceService) { }
+  constructor(private fb: FormBuilder, private authService: AuthenticationService) { }
 
   checkPassword(group:FormGroup){
       let pass = group.controls.password.value;
-      let confirmedPassword = group.controls.passwordRep.value;
+      let confirmedPassword = group.controls.confirmPassword.value;
 
       return pass == confirmedPassword ? null : {notSame: true}
 
@@ -61,61 +51,21 @@ export class RegisterComponent implements OnInit {
 
   onSubmit()
   {
-    if(this.registerForm.controls.typeOfUser.value === 'Djak')
-    {
-      this.addDjak();
-    }
-    else if(this.registerForm.controls.typeOfUser.value === 'Penzioner')
-    {
-      this.addPenzioner();
-    }
-    else
-    {
-      this.addRegularniKorisnik();
-    }
-  }
+    let controls = this.registerForm.controls;
+    let dataOld = [
+      controls.email.value,
+      controls.name.value,
+      controls.lastname.value,
+      controls.address.value,
+      controls.dateOfBirth.value,
+      controls.userType.value,
+      controls.password.value,
+    ];
 
-  addDjak()
-  {
-    this.djak.Ime = this.registerForm.controls.name.value;
-    this.djak.Prezime = this.registerForm.controls.lastname.value;
-    this.djak.Adresa = this.registerForm.controls.address.value;
-    this.djak.Lozinka = this.registerForm.controls.password.value;
-    this.djak.Email = this.registerForm.controls.email.value;
-    this.djak.DatumRodjenja = this.registerForm.controls.dateOfBirth.value;
-    this.djak.Slika = this.registerForm.controls.image.value;
+    let data = this.registerForm.value;
+    console.log(data);
 
-    //console.log(`${this.djak.Ime} ${this.djak.Prezime} ${this.djak.Adresa} ${this.djak.DatumRodjenja}`);
-    this.service.registerDjak(this.djak).subscribe(djak => {this.djaks.push(djak);
-    });
-  }
 
-  addPenzioner()
-  {
-    this.penzioner.Ime = this.registerForm.controls.name.value;
-    this.penzioner.Prezime = this.registerForm.controls.lastname.value;
-    this.penzioner.Adresa = this.registerForm.controls.address.value;
-    this.penzioner.Lozinka = this.registerForm.controls.password.value;
-    this.penzioner.Email = this.registerForm.controls.email.value;
-    this.penzioner.DatumRodjenja = this.registerForm.controls.dateOfBirth.value;
-    this.penzioner.Slika = this.registerForm.controls.image.value;
-
-    this.service.registerPenzioner(this.penzioner).subscribe(penzioner => {this.penzioners.push(penzioner);
-    });
-
-  }
-
-  addRegularniKorisnik()
-  {
-    this.regularniKorisnik.Ime = this.registerForm.controls.name.value;
-    this.regularniKorisnik.Prezime = this.registerForm.controls.lastname.value;
-    this.regularniKorisnik.Adresa = this.registerForm.controls.address.value;
-    this.regularniKorisnik.Lozinka = this.registerForm.controls.password.value;
-    this.regularniKorisnik.Email = this.registerForm.controls.email.value;
-    this.regularniKorisnik.DatumRodjenja = this.registerForm.controls.dateOfBirth.value;
-    
-    this.service.registerRegularniKorisnik(this.regularniKorisnik).subscribe(regularniKorisnik => {this.regularniKorisniks.push(regularniKorisnik);
-    });
-
+    this.authService.register(data).subscribe();
   }
 }

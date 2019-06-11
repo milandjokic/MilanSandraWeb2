@@ -3,8 +3,6 @@ import { FormBuilder } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-
-import { Djak, Penzioner, RegularniKorisnik } from '../classes';
 import { AuthenticationService } from '../services/auth.service';
 
 @Component({
@@ -17,10 +15,6 @@ export class LoginComponent implements OnInit {
     email : ['', [Validators.required, Validators.email]],
     password : ['', Validators.required],
   });
-  
-  djaks: Djak[] = [];
-  penzioners: Penzioner[] = [];
-  regularniKorisniks: RegularniKorisnik[] = [];
 
   constructor(private fb: FormBuilder, private service: AuthenticationService) { }
 

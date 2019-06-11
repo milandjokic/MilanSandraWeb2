@@ -17,6 +17,9 @@ namespace WebApp.Persistence.UnitOfWork
             _context = context;
         }
 
+        [Dependency]
+        public IPricelistItemRepository PricelistItemRepository { get; set; }
+
         public int Complete()
         {
             return _context.SaveChanges();

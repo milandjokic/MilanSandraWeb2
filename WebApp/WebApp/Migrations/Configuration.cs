@@ -72,7 +72,7 @@ namespace WebApp.Migrations
                 {
                     UserName = "pera@yahoo.com",
                     Email = "pera@yahoo.com",
-                    PasswordHash = ApplicationUser.HashPassword("perasifra"),
+                    PasswordHash = ApplicationUser.HashPassword("Perasifra123!"),
                     Name = "Petar",
                     Lastname = "Peric",
                     DateOfBirth = new DateTime(1996, 3, 25),
@@ -169,32 +169,36 @@ namespace WebApp.Migrations
 
             foreach (var pricelist in context.Pricelists)
             {
-                foreach(Item item in context.Items)
+                if (!context.PricelistItems.Any(p => p.IdPricelist == pricelist.Id))
                 {
-                    var pricelistItem = new PricelistItem()
+                    foreach(Item item in context.Items)
                     {
-                        IdPricelist = pricelist.Id,
-                        IdItem = item.Id
-                    };
+                        var pricelistItem = new PricelistItem()
+                        {
+                            IdPricelist = pricelist.Id,
+                            IdItem = item.Id
+                        };
 
-                    if (item.TicketType == TicketType.TimeTicket)
-                    {
-                        pricelistItem.Price = priceOfTimeTicket;
-                    }
-                    else if (item.TicketType == TicketType.DayTicket)
-                    {
-                        pricelistItem.Price = priceOfDayTicket;
-                    }
-                    else if (item.TicketType == TicketType.MonthTicket)
-                    {
-                        pricelistItem.Price = priceOfMonthTicket;
-                    }
-                    else
-                    {
-                        pricelistItem.Price = priceOfYearTicket;
+                        if (item.TicketType == TicketType.TimeTicket)
+                        {
+                            pricelistItem.Price = priceOfTimeTicket;
+                        }
+                        else if (item.TicketType == TicketType.DayTicket)
+                        {
+                            pricelistItem.Price = priceOfDayTicket;
+                        }
+                        else if (item.TicketType == TicketType.MonthTicket)
+                        {
+                            pricelistItem.Price = priceOfMonthTicket;
+                        }
+                        else
+                        {
+                            pricelistItem.Price = priceOfYearTicket;
+                        }
+
+                        context.PricelistItems.Add(pricelistItem);
                     }
 
-                    context.PricelistItems.Add(pricelistItem);
                 }
             }
         }

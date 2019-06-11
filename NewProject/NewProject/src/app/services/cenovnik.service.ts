@@ -11,12 +11,12 @@ const httpOptions = {
 })
 export class CenovnikService {
 
-  cenovnikUrl = 'http://localhost:52295/api/Cenovniks';
+  cenovnikUrl = 'http://localhost:52295/api/PricelistItems/GetPrice';
 
   constructor(private http: HttpClient) { }
 
-  getCenaKarte(vrstaKarte : string, tipKorisnika : string) : Observable<number>
+  getCenaKarte(vrstaKarte : any, tipKorisnika : any) : Observable<number>
   {
-    return this.http.get<number>(this.cenovnikUrl+'?'+'vrstaKarte='+vrstaKarte+'&tipKorisnika='+tipKorisnika);
+    return this.http.get<number>(this.cenovnikUrl+'?'+'ticketType='+vrstaKarte+'&userType='+tipKorisnika);
   }
 }

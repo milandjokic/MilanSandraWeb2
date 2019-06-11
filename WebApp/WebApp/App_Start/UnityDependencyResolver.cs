@@ -69,7 +69,14 @@ namespace WebApp.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
            
             container.RegisterType<DbContext, ApplicationDbContext>(new PerResolveLifetimeManager());
+            container.RegisterType<IPricelistItemRepository, PricelistItemRepository>();
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
+
+            container.RegisterType<ApplicationUserManager>();
+            container.RegisterType<ISecureDataFormat<AuthenticationTicket>, CustomJwtFormat>(new InjectionConstructor("http://localhost:52295"));
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
+                new InjectionConstructor(typeof(DbContext))
+                );
         }
 
         public void Dispose()
