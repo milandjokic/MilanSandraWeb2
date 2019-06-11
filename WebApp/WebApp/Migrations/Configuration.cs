@@ -162,42 +162,41 @@ namespace WebApp.Migrations
                 context.Coefficients.Add(coefPensioner);
             }
 
-            var priceOfTimeTicket = 65;
-            var priceOfDayTicket = 100;
-            var priceOfMonthTicket = 1000;
-            var priceOfYearTicket = 5500;
+            double priceOfTimeTicket = 65;
+            double priceOfDayTicket = 100;
+            double priceOfMonthTicket = 1000;
+            double priceOfYearTicket = 5500;
 
-            //foreach(var pricelist in context.Pricelists)
-            //{
-            //    foreach(var item in context.Items)
-            //    {
-            //        var pricelistItem = new PricelistItem()
-            //        {
-            //            IdPricelist = pricelist.Id,
-            //            IdItem = item.Id,
-            //            Price = 0
-            //        };
+            foreach (var pricelist in context.Pricelists)
+            {
+                foreach(Item item in context.Items)
+                {
+                    var pricelistItem = new PricelistItem()
+                    {
+                        IdPricelist = pricelist.Id,
+                        IdItem = item.Id
+                    };
 
-            //        if(item.TicketType == TicketType.TimeTicket)
-            //        {
-            //            pricelistItem.Price = priceOfTimeTicket;
-            //        }
-            //        else if(item.TicketType == TicketType.DayTicket)
-            //        {
-            //            pricelistItem.Price = priceOfDayTicket;
-            //        }
-            //        else if (item.TicketType == TicketType.MonthTicket)
-            //        {
-            //            pricelistItem.Price = priceOfMonthTicket;
-            //        }
-            //        else
-            //        {
-            //            pricelistItem.Price = priceOfYearTicket;
-            //        }
+                    if (item.TicketType == TicketType.TimeTicket)
+                    {
+                        pricelistItem.Price = priceOfTimeTicket;
+                    }
+                    else if (item.TicketType == TicketType.DayTicket)
+                    {
+                        pricelistItem.Price = priceOfDayTicket;
+                    }
+                    else if (item.TicketType == TicketType.MonthTicket)
+                    {
+                        pricelistItem.Price = priceOfMonthTicket;
+                    }
+                    else
+                    {
+                        pricelistItem.Price = priceOfYearTicket;
+                    }
 
-            //        context.PricelistItems.Add(pricelistItem);
-            //    }
-            //}
+                    context.PricelistItems.Add(pricelistItem);
+                }
+            }
         }
     }
 }
