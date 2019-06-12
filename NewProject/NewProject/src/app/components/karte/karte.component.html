@@ -1,0 +1,19 @@
+<br>
+<br>
+<div class="form">
+  <form class="login-form" [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <label>Izaberite kartu</label>
+    <br>
+    <select formControlName="typeOfCard" (change)="onSelect($event)" class="selectClass">
+      <option>TimeTicket</option>
+      <option *ngIf="loggedIn">DayTicket</option>
+      <option *ngIf="loggedIn">MonthTicket</option>
+      <option *ngIf="loggedIn">YearTicket</option>
+    </select>
+    <button type="submit" [disabled]="!ticketForm.valid">Kupi</button>
+  </form>
+  <br>
+  <label>Cena karte: </label>
+    <span>{{price}}</span>
+    <span>rsd</span>
+</div>

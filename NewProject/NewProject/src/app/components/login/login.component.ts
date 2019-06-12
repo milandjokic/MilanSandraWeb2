@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { FormArray } from '@angular/forms';
-import { Validators } from '@angular/forms';
-
-import { AuthenticationService } from '../services/auth.service';
+import { FormBuilder, Validators } from '@angular/forms'
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -11,29 +8,27 @@ import { AuthenticationService } from '../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   loginForm = this.fb.group({
-    email : ['', [Validators.required, Validators.email]],
-    password : ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private service: AuthenticationService) { }
+  constructor(private fb: FormBuilder, private authServise: AuthenticationService) { }
 
-  get f()
-  {
+  ngOnInit() {
+  }
+
+  get f(){
     return this.loginForm.controls;
   }
-  ngOnInit() {
-    
-  }
-  onSubmit()
-  {
-    console.log(this.loginForm.value.email + " " + this.loginForm.value.password);
-    this.onSignIn(this.loginForm.value.email,  this.loginForm.value.password);
+
+  onSubmit(){
+    this.onLogin(this.loginForm.value.email, this.loginForm.value.password);
   }
 
-
-  onSignIn(email : string, password : string){
-    this.service.signIn(email,password).subscribe(
+  onLogin(email: string, password: string){
+    this.authServise.login(email, password).subscribe(
       res => {
         console.log(res.access_token);
 
@@ -52,7 +47,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('jwt', jwt)
         localStorage.setItem('role', role)
         localStorage.setItem('name',a);
-        window.location.href = "/cenovnik"
+        window.location.href = "/profil"
       }
     );
   }

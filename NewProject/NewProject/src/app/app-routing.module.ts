@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from 'src/app/login/login.component';
-import { RegisterComponent } from 'src/app/register/register.component';
-import {CenovnikComponent} from 'src/app/cenovnik/cenovnik.component';
-import { KarteComponent } from 'src/app/karte/karte.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CenovnikComponent } from './components/cenovnik/cenovnik.component';
+import { KarteComponent } from './components/karte/karte.component';
+import { ProfilComponent } from './components/profil/profil.component';
 
 const routes: Routes = [
   {
@@ -21,8 +22,11 @@ const routes: Routes = [
   {
     path: 'karte',
     component: KarteComponent
-  }
-
+  },
+  {
+    path: 'profil',
+    component: ProfilComponent
+  },
 ];
 
 @NgModule({

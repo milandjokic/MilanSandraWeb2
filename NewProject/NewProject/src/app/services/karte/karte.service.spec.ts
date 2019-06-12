@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { KupovinaKarteService } from './kupovina-karte.service';
+import { KarteService } from './karte.service';
 
-describe('KupovinaKarteService', () => {
+describe('KarteService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: KupovinaKarteService = TestBed.get(KupovinaKarteService);
+    const service: KarteService = TestBed.get(KarteService);
     expect(service).toBeTruthy();
   });
 });

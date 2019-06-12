@@ -6,12 +6,12 @@
     <li><a routerLink="/karte">Karte</a></li>
     <li><a routerLink="/cenovnik" >Cenovnik</a></li>
 
-    <div *ngIf="!loggedIn" class="klasa">
+    <div *ngIf="!isLoggedIn" class="klasa">
       <li><a routerLink="/login">Prijava</a></li>
       <li><a routerLink="/register" >Registracija</a></li>    
     </div>
 
-    <div *ngIf="loggedIn" class="klasa">
+    <div *ngIf="isLoggedIn" class="klasa">
       <li><a routerLink="/profil">MojProfil</a></li>
       <li><a (click)="logout($event)" >Odjava</a></li>    
     </div>

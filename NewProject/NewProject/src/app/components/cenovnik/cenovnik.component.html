@@ -1,0 +1,17 @@
+<br>
+<br>
+<div class="form">
+  <h3>Cenovnik</h3>
+  <select name="ticketType" class="form-control" (change)="onSelectTicket($event)" class="selectClass">
+    <option *ngFor="let ticket of ticketTypes" [value]="ticket">{{ticket}}</option>
+  </select>
+  <select name="userType" class="form-control" (change)="onSelectUser($event)" class="selectClass">
+    <option *ngFor="let user of userTypes" [value]="user">{{user}}</option>
+  </select>
+  <br>
+  <div class="labela">
+    <label>Cena karte: </label>
+    <span>{{price}}</span>
+    <span>rsd</span>
+  </div>
+</div>

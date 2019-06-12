@@ -1,0 +1,21 @@
+<div class="login-page">
+    <div class="form">
+      <form class="login-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <input formControlName="name" type="text" placeholder="Ime"/>
+        <input formControlName="lastname" type="text" placeholder="Prezime"/>
+        <input formControlName="address" type="text" placeholder="Adresa"/>
+        <input formControlName="email" type="email" placeholder="Email"/>
+        <input formControlName="password" type="password" placeholder="Sifra" name = "password"/>
+        <input formControlName="confirmPassword" type="password" placeholder="Potvrdite sifru" name="confirmPassword"/>
+        <input formControlName="dateOfBirth" type="date" placeholder="Datum rodjenja"/>
+        <select formControlName="userType" (change)="onSelect($event)" class="selectClass">
+          <option selected="selected" *ngFor="let k of userTypes"  [value] = "k">{{k}}</option> 
+        </select>
+        <div *ngIf="selectedUserType != 'RegularUser'">
+          <input type="file" accept="image/*"  formControlName="image"/>
+        </div>
+        <button type="submit" [disabled]="!registerForm.valid">Registracija</button>
+      </form>
+    </div>
+  </div>
+  
