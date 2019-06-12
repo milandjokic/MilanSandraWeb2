@@ -70,6 +70,7 @@ namespace WebApp.App_Start
            
             container.RegisterType<DbContext, ApplicationDbContext>(new PerResolveLifetimeManager());
             container.RegisterType<IPricelistItemRepository, PricelistItemRepository>();
+            container.RegisterType<ITicketRepository, TicketRepository>();
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
 
             container.RegisterType<ApplicationUserManager>();
