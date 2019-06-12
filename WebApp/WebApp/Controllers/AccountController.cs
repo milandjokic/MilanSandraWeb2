@@ -83,6 +83,33 @@ namespace WebApp.Controllers
             return Ok();
         }
 
+        [Route("Edit")]
+        public async Task<IHttpActionResult> Edit(EditBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = UserManager.FindByEmail(model.Email);
+            user.UserName = model.Email;
+            user.Email = model.Email;
+            user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
+            user.Address = model.Address;
+            user.Name = model.Name;
+            user.Lastname = model.Lastname;
+            //user.Image = path;
+            //path = "";
+
+            IdentityResult result = await UserManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)

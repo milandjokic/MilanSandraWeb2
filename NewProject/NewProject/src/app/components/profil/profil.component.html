@@ -1,3 +1,36 @@
-<p>
-  profil works!
-</p>
+<div class="login-page">
+  <div class="form">
+    <form class="login-form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <span> Ime </span>
+      <input formControlName="name" type="text" placeholder="Ime"/><br><br>
+      <span> Pezime </span>
+      <input formControlName="lastname" type="text" placeholder="Prezime"/><br><br>
+      <span> Adresa </span>
+      <input formControlName="address" type="text" placeholder="Adresa"/><br><br>
+      <span> Email </span>
+      <input formControlName="email" type="email" disabled placeholder="Email"/><br><br>
+      <span> Datum rodjenja </span>
+      <input formControlName="dateOfBirth" type="date" placeholder="Datum rodjenja"/><br><br>
+      <!--<span> Tip korisnika </span>
+      <div *ngIf="selectValue == 'RegularUser'; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+          <select name="userType" (change)="onSelect($event)" required formControlName="userType">
+            <option>RegularUser</option>
+            <option>Student</option>
+            <option>Pensioner</option>
+          </select>
+        </ng-template>
+        <ng-template #elseBlock>
+            <select name="userType" disabled class="form-control">
+                <option>{{selectValue}}</option>
+              </select>
+        </ng-template>
+        <br>-->
+      <div *ngIf="selectedUserType != 'RegularUser' && userProfileActivated == 'false'">
+        <input type="file" accept="image/*"  formControlName="image"/>
+      </div>
+      <br>
+      <button type="submit" [disabled]="!profileForm.valid">Izmena</button>
+    </form>
+  </div>
+</div>

@@ -13,7 +13,7 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient) { }
 
   register(user): Observable<any>{
-    return this.httpClient.post(this.base_url+"api/Account/Register", user);
+    return this.httpClient.post(this.base_url+"/api/Account/Register", user);
   }
 
   login(email: string, password: string){
@@ -36,6 +36,7 @@ export class AuthenticationService {
     localStorage.removeItem('role');
     localStorage.removeItem('name');
     localStorage.removeItem('randid');
+    window.location.href = "/login"
   }
 
   getTypes(){
