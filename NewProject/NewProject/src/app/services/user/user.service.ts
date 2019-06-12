@@ -16,7 +16,9 @@ export class UserService {
     return this.httpClient.get('http://localhost:52295/api/Account/GetUserData?email='+email)
   }
   edit(user): Observable<any>{
-    console.log(user);
     return this.httpClient.post(`http://localhost:52295/api/Account/Edit`,user);
+  }
+  remove(user): Observable<any>{
+    return this.httpClient.post(`http://localhost:52295/api/Account/RemoveUser`, user);
   }
 }

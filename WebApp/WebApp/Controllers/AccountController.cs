@@ -110,6 +110,25 @@ namespace WebApp.Controllers
             return Ok();
         }
 
+        [Route("RemoveUser")]
+        public async Task<IHttpActionResult> RemoveUser(EditBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = UserManager.FindByEmail(model.Email);
+
+            IdentityResult result = await UserManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)

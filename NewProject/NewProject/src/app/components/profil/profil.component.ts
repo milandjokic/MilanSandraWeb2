@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: 'app-profil',
@@ -25,7 +26,7 @@ export class ProfilComponent implements OnInit {
   tempDate = new Date();
   selectValue: any;
 
-  constructor(public router: Router, private fb: FormBuilder, private userService: UserService) { }
+  constructor(public router: Router, private fb: FormBuilder, private userService: UserService, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.getUser();
@@ -101,5 +102,11 @@ export class ProfilComponent implements OnInit {
 
   onSubmit(){
     this.userService.edit(this.profileForm.value).subscribe();
+  }
+
+  delete(){
+    this.userService.remove(this.profileForm.value).subscribe();
+    this.authService.logout();
+    window.location.href = '/login';
   }
 }
