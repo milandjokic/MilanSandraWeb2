@@ -11,7 +11,7 @@ namespace WebApp.Persistence.UnitOfWork
     public class DemoUnitOfWork : IUnitOfWork
     {
         private readonly DbContext _context;
-      
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;
@@ -21,6 +21,8 @@ namespace WebApp.Persistence.UnitOfWork
         public IPricelistItemRepository PricelistItemRepository { get; set; }
         [Dependency]
         public ITicketRepository TicketRepository { get; set; }
+        [Dependency]
+        public ITimetableRepository TimetableRepository { get; set; }
 
         public int Complete()
         {

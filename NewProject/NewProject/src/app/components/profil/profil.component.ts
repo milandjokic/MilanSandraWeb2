@@ -25,6 +25,7 @@ export class ProfilComponent implements OnInit {
   userProfileActivated: any;
   tempDate = new Date();
   selectValue: any;
+  role = localStorage['role'];
 
   constructor(public router: Router, private fb: FormBuilder, private userService: UserService, private authService: AuthenticationService) { }
 

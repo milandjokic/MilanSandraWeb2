@@ -32,7 +32,9 @@
       <br>
       <button type="submit" [disabled]="!profileForm.valid">Izmena</button>
       <br><br>
-      <button (click)="delete()">Obrisi nalog</button>
+      <div *ngIf="role == 'AppUser'">
+        <button (click)="delete()">Obrisi nalog</button>
+      </div>
     </form>
   </div>
 </div>
