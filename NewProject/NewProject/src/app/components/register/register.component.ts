@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   userTypes = ['Student', 'Pensioner', 'RegularUser'];
   selectedUserType = 'RegularUser';
+ // emailInUse: boolean = false;
 
   registerForm = this.fb.group({
     name : ['', Validators.required],

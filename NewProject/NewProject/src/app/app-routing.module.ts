@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { CenovnikComponent } from './components/cenovnik/cenovnik.component';
 import { KarteComponent } from './components/karte/karte.component';
 import { ProfilComponent } from './components/profil/profil.component';
+import { StanicaComponent } from './components/stanica/stanica.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'profil',
     component: ProfilComponent
+  },
+  {
+    path: 'stanica',
+    component: StanicaComponent
   },
 ];
 

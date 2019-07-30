@@ -14,6 +14,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { CenovnikComponent } from './components/cenovnik/cenovnik.component';
 import { KarteComponent } from './components/karte/karte.component';
 import { ProfilComponent } from './components/profil/profil.component';
+import { StanicaComponent } from './components/stanica/stanica.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ProfilComponent } from './components/profil/profil.component';
     RegisterComponent,
     CenovnikComponent,
     KarteComponent,
-    ProfilComponent
+    ProfilComponent,
+    StanicaComponent
   ],
   imports: [
     BrowserModule,

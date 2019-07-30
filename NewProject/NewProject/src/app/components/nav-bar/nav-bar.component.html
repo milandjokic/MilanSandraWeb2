@@ -1,18 +1,26 @@
 <nav>
   <ul>
-    <li><a routerLink="/">Mreza linija</a></li>
-    <li><a routerLink="/" >Red voznje</a></li>
-    <li><a routerLink="/">Trenutna lokacija</a></li>
-    <li><a routerLink="/karte">Karte</a></li>
-    <li><a routerLink="/cenovnik" >Cenovnik</a></li>
+    <div *ngIf="userRole != 'Admin'">
+      <li><a routerLink="/">Mreza linija</a></li>
+      <li><a routerLink="/" >Red voznje</a></li>
+      <li><a routerLink="/">Trenutna lokacija</a></li>
+      <li><a routerLink="/karte">Karte</a></li>
+      <li><a routerLink="/cenovnik" >Cenovnik</a></li>
+    </div>
 
-    <div *ngIf="!isLoggedIn" class="klasa">
+    <div *ngIf="userRole == 'Admin'">
+      <li><a routerLink="/stanica">Upravljaj stanicama</a></li>
+      <li><a routerLink="/">Upravljaj linijama</a></li>
+      <li><a routerLink="/">Upravljaj redovima voznje</a></li>
+    </div>
+
+    <div *ngIf="!userRole" class="klasa">
       <li><a routerLink="/login">Prijava</a></li>
       <li><a routerLink="/register" >Registracija</a></li>    
     </div>
 
-    <div *ngIf="isLoggedIn" class="klasa">
-      <li><a routerLink="/profil">MojProfil</a></li>
+    <div *ngIf="userRole" class="klasa">
+      <li><a routerLink="/profil">Moj Profil</a></li>
       <li><a (click)="logout($event)" >Odjava</a></li>    
     </div>
   </ul>

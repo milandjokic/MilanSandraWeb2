@@ -1,13 +1,50 @@
 <div class="login-page">
     <div class="form">
       <form class="login-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="registerForm.controls.name.errors" >
+            <div *ngIf="registerForm.controls.name.errors.required && (registerForm.controls.name.dirty || registerForm.controls.name.touched)">Ime je obavezno polje</div>
+          </div><br>
         <input formControlName="name" type="text" placeholder="Ime"/>
+        <div *ngIf="registerForm.controls.lastname.errors" >
+            <div *ngIf="registerForm.controls.lastname.errors.required && (registerForm.controls.lastname.dirty || registerForm.controls.lastname.touched)">Prezime je obavezno polje</div>
+          </div>
         <input formControlName="lastname" type="text" placeholder="Prezime"/>
+        <div *ngIf="registerForm.controls.address.errors" >
+            <div *ngIf="registerForm.controls.address.errors.required && (registerForm.controls.address.dirty || registerForm.controls.address.touched)">Adresa je obavezno polje</div>
+          </div>
         <input formControlName="address" type="text" placeholder="Adresa"/>
+        <div *ngIf="registerForm.controls.email.errors" >
+            <div *ngIf="registerForm.controls.email.errors.required && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">Email je obavezno polje</div>
+        </div>
+        <div *ngIf="emailInUse == true" >
+            <div>Email je vec u upotrebi</div>
+        </div>
         <input formControlName="email" type="email" placeholder="Email"/>
+            <div *ngIf="registerForm.controls.password.errors" >
+                <div *ngIf="registerForm.controls.password.errors.required && (registerForm.controls.password.dirty || registerForm.controls.password.touched)">Sifra je obavezno polje</div>
+            </div>
+            <div *ngIf="registerForm.controls.password.status == 'INVALID' && registerForm.controls.password.errors" >
+                <div *ngIf="(registerForm.controls.password.dirty || registerForm.controls.password.touched)">Sifra mora da ima minimum 8 karaktera</div>
+            </div>
         <input formControlName="password" type="password" placeholder="Sifra" name = "password"/>
+
+        <div *ngIf="registerForm.controls.confirmPassword.errors" >
+            <div *ngIf="registerForm.controls.confirmPassword.errors.required && (registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)">Potvrda sifre je obavezno polje</div>
+        </div>
+        <div *ngIf="registerForm.controls.confirmPassword.status == 'INVALID' && registerForm.controls.confirmPassword.errors" >
+            <div *ngIf="(registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)">Potvrda sifre mora imati minimum 8 karaktera</div>
+        </div>
+        <div *ngIf="checkPassword(registerForm) != null" >
+            <div *ngIf="(registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)">Sifre moraju da se podudaraju</div>
+        </div>
         <input formControlName="confirmPassword" type="password" placeholder="Potvrdite sifru" name="confirmPassword"/>
+          <div *ngIf="registerForm.controls.dateOfBirth.errors" >
+              <div *ngIf="registerForm.controls.dateOfBirth.errors.required && (registerForm.controls.dateOfBirth.dirty || registerForm.controls.dateOfBirth.touched)">Datum rodjenja je obavezno polje</div>
+            </div>
         <input formControlName="dateOfBirth" type="date" placeholder="Datum rodjenja"/>
+        <div *ngIf="registerForm.controls.userType.errors" >
+            <div *ngIf="registerForm.controls.userType.errors.required && (registerForm.controls.userType.dirty || registerForm.controls.userType.touched)">Tip korisnika je obavezno polje</div>
+        </div>
         <select formControlName="userType" (change)="onSelect($event)" class="selectClass">
           <option selected="selected" *ngFor="let k of userTypes"  [value] = "k">{{k}}</option> 
         </select>

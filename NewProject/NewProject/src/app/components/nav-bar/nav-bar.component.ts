@@ -8,17 +8,17 @@ import { AuthenticationService } from 'src/app/services/auth/authentication.serv
 })
 export class NavBarComponent implements OnInit {
 
-  isLoggedIn : any;
+  userRole : any;
 
   constructor(private authServise: AuthenticationService) { }
 
   ngOnInit() {
-    this.isLoggedIn = localStorage['role'];
+    this.userRole = localStorage['role'];
   }
 
   logout(){
     this.authServise.logout();
-    this.isLoggedIn = localStorage['role'];
+    this.userRole = localStorage['role'];
     
   }
 
