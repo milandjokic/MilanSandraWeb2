@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Output } from '@angular/core';
+
+import { AgmCoreModule } from '@agm/core';
+import { MapComponent } from './components/map/map.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +29,8 @@ import { StanicaComponent } from './components/stanica/stanica.component';
     CenovnikComponent,
     KarteComponent,
     ProfilComponent,
-    StanicaComponent
+    StanicaComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,8 @@ import { StanicaComponent } from './components/stanica/stanica.component';
     HttpModule,
     HttpClientModule,
     ReactiveFormsModule,
-
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
+    Output
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
