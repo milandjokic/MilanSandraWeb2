@@ -16,4 +16,10 @@
   <label>Cena karte: </label>
     <span>{{price}}</span>
     <span>rsd</span>
+    <div *ngIf="!loggedIn">
+      <input #emailInput name="email" type="email" placeholder="Email" (input)="email=emailInput.value" required>
+    </div>
+    <div>
+      {{email}}
+    </div>
 </div>

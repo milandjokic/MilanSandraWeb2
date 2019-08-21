@@ -19,6 +19,7 @@ export class KarteComponent implements OnInit {
   userProfileActivated: any;
   userProfileType: any;
   addTicket: any;
+  email: any;
 
   ticketForm = this.fb.group({
     typeOfCard : ['TimeTicket', Validators.required]
@@ -40,7 +41,7 @@ export class KarteComponent implements OnInit {
   }
 
   onSubmit(){
-    this.karteService.addTicket(this.price, this.choosenTicketType, localStorage.getItem('name')).subscribe(data => this.addTicket=data);
+    this.karteService.addTicket(this.price, this.choosenTicketType, localStorage.getItem('name'), this.email).subscribe(data => this.addTicket=data);
   }
 
   getUser(){

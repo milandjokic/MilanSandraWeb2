@@ -57,9 +57,14 @@ namespace WebApp.Controllers
             {
                 ticket.IdApplicationUser = UnitOfWork.TicketRepository.GetIdByEmail(p[2]);
             }
-
             UnitOfWork.TicketRepository.Add(ticket);
             UnitOfWork.Complete();
+
+            if (p[2] == null)
+            {
+                EmailHelper.SendEmail(p[3], "Kupovina karte", "Uspesno ste kupili kartu sa ID: " + ticket.Id);
+            }
+
             return Ok(ticket.Id);
         }
 
