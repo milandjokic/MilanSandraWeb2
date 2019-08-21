@@ -18,6 +18,7 @@ import { CenovnikComponent } from './components/cenovnik/cenovnik.component';
 import { KarteComponent } from './components/karte/karte.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { StanicaComponent } from './components/stanica/stanica.component';
+import { RasporedComponent } from './components/raspored/raspored.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { StanicaComponent } from './components/stanica/stanica.component';
     KarteComponent,
     ProfilComponent,
     StanicaComponent,
-    MapComponent
+    MapComponent,
+    RasporedComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +41,8 @@ import { StanicaComponent } from './components/stanica/stanica.component';
     HttpModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
-    Output
-  ],
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
+    ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

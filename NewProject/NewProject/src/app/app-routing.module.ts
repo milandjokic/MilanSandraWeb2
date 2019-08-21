@@ -6,6 +6,7 @@ import { CenovnikComponent } from './components/cenovnik/cenovnik.component';
 import { KarteComponent } from './components/karte/karte.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { StanicaComponent } from './components/stanica/stanica.component';
+import { RasporedComponent} from './components/raspored/raspored.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'stanica',
     component: StanicaComponent
+  },
+  {
+    path: 'raspored',
+    component: RasporedComponent
   },
 ];
 

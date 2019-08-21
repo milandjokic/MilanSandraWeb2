@@ -5,3 +5,4 @@ export class Station{
     XCoordinate: number;
     YCoordinate: number;
 }
+

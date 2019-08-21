@@ -1,0 +1,40 @@
+<br>
+<br>
+<form class="form" [formGroup]="timetableForm" (ngSubmit)="getTimetable()"><br><br>
+  <br><br><div class="container">
+    <div class="row">
+  
+    <select name="dayType" class="form-control"  formControlName="dayType" >
+      <option>Weekday</option>
+      <option>Weekend</option>
+    </select><br>
+    
+    <select name="lineType" class="form-control" (change)="getLines($event)"  formControlName="lineType">
+      <option>City</option>
+      <option>Suburban</option>
+    </select>
+    <br>
+              
+    <select name="lineName" class="form-control" required formControlName="lineName">
+        <option></option>
+      <option *ngFor="let line of Lines"> {{line.LineName}}</option>
+    </select><br>
+    <div *ngIf="timetableForm.controls.lineName.value">
+        <button type="submit">Register</button>
+      </div>
+      <br>
+      <br>
+      <div *ngIf="!timetableForm.controls.lineName.value">
+        <button disabled type="submit">Register</button>
+      </div>
+    <!--<button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Schedule</button>-->
+    <br>
+    
+    <li *ngFor="let item of Departures">
+        {{item.Departures}}
+    </li>
+                          
+            
+    </div><br>      
+  </div>  
+</form>
