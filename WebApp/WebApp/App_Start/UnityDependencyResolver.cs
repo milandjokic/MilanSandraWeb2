@@ -72,6 +72,7 @@ namespace WebApp.App_Start
             container.RegisterType<IPricelistItemRepository, PricelistItemRepository>();
             container.RegisterType<ITicketRepository, TicketRepository>();
             container.RegisterType<ITimetableRepository, TimetableRepository>();
+            container.RegisterType<IStationRepository, StationRepository>();
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
 
             container.RegisterType<ApplicationUserManager>();

@@ -105,6 +105,7 @@ namespace WebApp.Controllers
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
+
             }
 
             return Ok();

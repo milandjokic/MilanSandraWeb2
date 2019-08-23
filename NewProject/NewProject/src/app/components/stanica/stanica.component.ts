@@ -26,8 +26,10 @@ export class StanicaComponent implements OnInit {
    });
 
    stations: Station[] = [];
-   selectValue: number;
+   selectValue: any;
    selectedStation: Station;
+   station : Station;
+   lines : string[] = [];
 
   constructor(private fb: FormBuilder, private stationService: StanicaService) { this.getStations();}
 
@@ -45,14 +47,58 @@ export class StanicaComponent implements OnInit {
       this.editOrRemoveStationForm.controls.xCoordinate.setValue(s.XCoordinate);
       this.editOrRemoveStationForm.controls.yCoordinate.setValue(s.YCoordinate);
     });
+    this.findLines();
   }
 
   addStation(){
-    this.stationService.addStation(this.addStationForm.value).subscribe();
+    this.stationService.addStation(this.addStationForm.value).subscribe(
+      data => {
+        this.getStations();
+        window.alert("Uspesno dodana stanica" + data.Id);
+        this.addStationForm.reset();
+
+      }
+
+    );
+ 
   }
 
   getStations(){
     this.stationService.getStations().subscribe(s => this.stations = s);
   }
 
-}
+  deleteStation()
+  {
+      this.stationService.deleteStation(this.selectValue).subscribe(
+        d=>{
+          this.getStations();
+          window.alert("Stanica je uspesno obrisana " + this.selectValue);
+          this.selectValue = "";
+          this.editOrRemoveStationForm.reset();
+        }
+      );
+  }
+
+  findLines()
+  {
+    this.stationService.findLines(this.selectValue).subscribe(
+      data => {
+        this.lines = data;
+      }
+    );
+
+  }
+  editStation()
+  {
+      this.stationService.editStation(this.editOrRemoveStationForm.value, this.selectValue).subscribe(
+        data =>{
+          this.getStations();
+          window.alert("USPESNO MENJANJE STANICE SA ID: " + this.selectValue);
+          this.editOrRemoveStationForm.reset();
+        }
+      );
+     
+      }  
+  }
+
+

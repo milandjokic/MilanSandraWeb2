@@ -13,7 +13,7 @@
     </div>
     <div>
         <div class="form">
-          <form class="login-form" [formGroup]="editOrRemoveStationForm" (ngSubmit)="editStation()">
+          <form class="login-form" [formGroup]="editOrRemoveStationForm">
             <select formControlName="stations" (change)="onSelect($event)" class="selectClass">
               <option *ngFor="let s of stations"  [value] = "s.Id">{{s.Name}}</option> 
             </select>
@@ -21,10 +21,16 @@
             <input formControlName="address" type="text" placeholder="Adresa"/>
             <input formControlName="xCoordinate" type="text" placeholder="X koordinata"/>
             <input formControlName="yCoordinate" type="text" placeholder="Y koordinata"/>
-            <button type="submit" [disabled]="!editOrRemoveStationForm.valid">Promeni stanicu</button>
+            <button type="submit" [disabled]="!editOrRemoveStationForm.valid" (click)="editStation()">Promeni stanicu</button>
             <br><br>
-            <button (click)="deleteStation()">Obrisi nalog</button>
+            <button (click)="deleteStation()">Obrisi stanicu</button>
           </form>
+          <div>
+            <label>Linije</label>
+            <li *ngFor="let s of lines">
+                  {{s}}
+            </li>
+          </div>
         </div>
     </div>
     <br/>
