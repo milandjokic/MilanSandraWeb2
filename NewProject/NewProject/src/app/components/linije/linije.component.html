@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="login-page column">
+    <div>
+        <div class="form">
+          <form class="login-form" [formGroup]="addLineForm" (ngSubmit)="addLine()">
+            <input formControlName="lineName" type="text" placeholder="Ime"/>
+            <br>
+            <div>
+            <select formControlName="lineType" [value]='City'>
+                <option value="City">City</option>
+                <option value="Suburban">Suburban</option>
+            </select>
+            </div>
+            <br>
+            <div *ngFor="let s of allStations">
+              <input type="checkbox" isChecked value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
+            </div>
+            <br>
+            <br>
+            <button type="submit" [disabled]="!addLineForm.valid">Dodaj liniju</button>
+          </form>
+        </div>
+      </div>
+      <div>
+          <div class="form">
+            <form class="login-form" [formGroup]="editOrRemoveLineForm">
+              <select formControlName="lines" (change)="onSelect($event)" class="selectClass">
+                <option *ngFor="let l of lines" [value] = "l.Id">{{l.LineName}}</option> 
+              </select>
+              <input formControlName="lineName" type="text" placeholder="Ime"/>
+              <select formControlName="lineType">
+                  <option value="0">City</option>
+                  <option value="1">Suburban</option>
+              </select><br>
+              <br>
+              <div *ngFor="let s of allStations">
+                  <input type="checkbox" isChecked value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
+    
+                </div>
+                <br>
+              <button type="submit" [disabled]="!editOrRemoveLineForm.valid" (click)="editLine()">Promeni liniju</button>
+              <br><br>
+              <button (click)="deleteLine()">Obrisi liniju</button>
+            </form>
+          </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+  </div>
+  </div>
+    

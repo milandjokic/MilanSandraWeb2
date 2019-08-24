@@ -7,6 +7,7 @@ import { KarteComponent } from './components/karte/karte.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { StanicaComponent } from './components/stanica/stanica.component';
 import { RasporedComponent} from './components/raspored/raspored.component';
+import { LinijeComponent} from './components/linije/linije.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
     path: 'raspored',
     component: RasporedComponent
   },
+  {
+    path: 'linije',
+    component: LinijeComponent
+  }
 ];
 
 @NgModule({
