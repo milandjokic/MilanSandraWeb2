@@ -30,20 +30,45 @@ namespace WebApp.Controllers
         // GET: api/PricelistItems
         public IQueryable<PricelistItem> GetPricelistItems()
         {
-            return db.PricelistItems;
+            return UnitOfWork.PricelistItemRepository.GetAll().AsQueryable();
         }
 
+        [Route("GetActivePricelists")]
+        //[ResponseType(typeof(Tuple<Pricelist, List<double>>))]
+        public IHttpActionResult GetActivePricelists()
+        {
+            List<object> ret = new List<object>();
+            ret.Add(UnitOfWork.PricelistItemRepository.getPrices().Item1);
+            ret.Add(UnitOfWork.PricelistItemRepository.getPrices().Item2);
+            return Ok(ret);
+        }
         // GET: api/PricelistItems/5
         [ResponseType(typeof(PricelistItem))]
         public IHttpActionResult GetPricelistItem(int id)
         {
-            PricelistItem pricelistItem = db.PricelistItems.Find(id);
+            PricelistItem pricelistItem = UnitOfWork.PricelistItemRepository.Get(id);
+            //PricelistItem pricelistItem = db.PricelistItems.Find(id);
             if (pricelistItem == null)
             {
                 return NotFound();
             }
 
             return Ok(pricelistItem);
+        }
+
+        [Route("EditPricelist")]
+        [ResponseType(typeof(Pricelist))]
+        public IHttpActionResult EditPricelist(int id, double timeTicket, double dayTicket, double monthTicket, double yearTicket)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            UnitOfWork.PricelistItemRepository.editPricelist(id, timeTicket, dayTicket, monthTicket, yearTicket);
+            UnitOfWork.PricelistItemRepository.SaveChanges();
+
+            return Ok(id);
         }
 
         // PUT: api/PricelistItems/5
@@ -60,11 +85,11 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
 
-            db.Entry(pricelistItem).State = EntityState.Modified;
-
+            //db.Entry(pricelistItem).State = EntityState.Modified;
+            UnitOfWork.PricelistItemRepository.Entry(pricelistItem, EntityState.Modified);
             try
             {
-                db.SaveChanges();
+                UnitOfWork.PricelistItemRepository.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -90,8 +115,10 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.PricelistItems.Add(pricelistItem);
-            db.SaveChanges();
+            UnitOfWork.PricelistItemRepository.Add(pricelistItem);
+
+           // db.PricelistItems.Add(pricelistItem);
+            UnitOfWork.PricelistItemRepository.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = pricelistItem.Id }, pricelistItem);
         }
@@ -106,8 +133,8 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            db.PricelistItems.Remove(pricelistItem);
-            db.SaveChanges();
+            UnitOfWork.PricelistItemRepository.Remove(pricelistItem);
+            UnitOfWork.PricelistItemRepository.SaveChanges();
 
             return Ok(pricelistItem);
         }
@@ -124,7 +151,7 @@ namespace WebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                UnitOfWork.PricelistItemRepository.Dispose();
             }
             base.Dispose(disposing);
         }

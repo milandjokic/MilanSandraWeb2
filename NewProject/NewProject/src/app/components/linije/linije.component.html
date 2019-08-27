@@ -13,7 +13,7 @@
             </div>
             <br>
             <div *ngFor="let s of allStations">
-              <input type="checkbox" isChecked value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
+               <input type="checkbox" isChecked [checked]="s.Exist" value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
             </div>
             <br>
             <br>
@@ -34,7 +34,7 @@
               </select><br>
               <br>
               <div *ngFor="let s of allStations">
-                  <input type="checkbox" isChecked value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
+                  <input type="checkbox" isChecked [checked]="s.Exist" value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
     
                 </div>
                 <br>

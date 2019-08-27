@@ -1,0 +1,30 @@
+<div class="login-page">
+  <div class="form">
+    <form class="login-form" [formGroup]="pricelistForm">
+        <div class="form-label-group">
+            <input type="hidden" name="from" class="form-control" required formControlName="from">
+            <button type="button" class="form-control" disabled>{{pricelistForm.controls.from.value}}</button>
+        </div>
+        <div class="form-label-group">
+            <input type="hidden" name="to" class="form-control" required formControlName="to">
+            <button type="button" class="form-control" disabled>{{pricelistForm.controls.to.value}}</button>
+        </div>
+      <span> Vremenska karta </span>
+      <input formControlName="timeTicket" type="number"/><br><br>
+      <span> Dnevna karta </span>
+      <input formControlName="dayTicket" type="number"/><br><br>
+      <span> Mesecna karta </span>
+      <input formControlName="monthTicket" type="number"/><br><br>
+      <span> Godisnja karta</span>
+      <input formControlName="yearTicket" type="number"/><br><br>
+      <br><br>
+      <div *ngIf="pricelistForm.valid">
+        <button (click)="editPricelist()">Uredi cenovnik</button>
+
+      </div>
+      <div *ngIf="!pricelistForm.valid">
+          <button [disabled]="!pricelistForm.valid"(click)="editPricelist()">Uredi cenovnik</button>
+      </div>
+    </form>
+  </div>
+</div>

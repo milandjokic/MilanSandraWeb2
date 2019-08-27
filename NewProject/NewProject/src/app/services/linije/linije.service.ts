@@ -31,7 +31,12 @@ export class LinijeService {
     return this.http.delete<any>(`http://localhost:52295/api/Lines/Delete?id=${id}`);
   }
 
-  editLine(line: any, id:any): Observable<any>{
-    return this.http.post<any>(`http://localhost:52295/api/Lines/Edit?line=${line}&id=${id}`, line, id);
+  editLine(lineName: any, lineType: any, id:any, stationsIds : any): Observable<any>{
+    return this.http.post<any>(`http://localhost:52295/api/Lines/Edit?lineName=${lineName}&lineType=${lineType}&id=${id}&stationsIds=${stationsIds}`, [lineName, lineType, id, stationsIds]);
+  }
+
+  getLineStations(id : any): Observable<any[]>
+  {
+    return this.http.get<any[]>(`http://localhost:52295/api/Lines/GetLinesStations?id=${id}`);
   }
 }

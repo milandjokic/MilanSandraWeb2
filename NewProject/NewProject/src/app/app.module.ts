@@ -20,6 +20,7 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { StanicaComponent } from './components/stanica/stanica.component';
 import { RasporedComponent } from './components/raspored/raspored.component';
 import { LinijeComponent } from './components/linije/linije.component';
+import { CenovnikAdminComponent } from './components/cenovnik-admin/cenovnik-admin/cenovnik-admin.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { LinijeComponent } from './components/linije/linije.component';
     StanicaComponent,
     MapComponent,
     RasporedComponent,
-    LinijeComponent
+    LinijeComponent,
+    CenovnikAdminComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
 import {LinijeService} from 'src/app/services/linije/linije.service';
@@ -6,8 +6,6 @@ import { Line } from 'src/app/models/linija';
 import { Station } from 'src/app/models/station';
 import { StanicaService } from 'src/app/services/stanica/stanica.service';
 import { ConditionalExpr } from '@angular/compiler';
-
-
 
 @Component({
   selector: 'app-linije',
@@ -32,6 +30,9 @@ export class LinijeComponent implements OnInit {
    allStations: Station[] = [];
    stationsId: number[] = [];
    i: number;
+   lineStationsIds: any[] = [];
+   j : number;
+
 
   constructor(private fb: FormBuilder, private linesService: LinijeService, private stationService: StanicaService) { }
 
@@ -56,15 +57,40 @@ export class LinijeComponent implements OnInit {
       this.editOrRemoveLineForm.controls.lineName.setValue(l.LineName);
       this.editOrRemoveLineForm.controls.lineType.setValue(l.LineType);
     });
-    this.getAllStations();
+    //this.getAllStations();
+    this.linesService.getLineStations(this.selectValue).subscribe(
+      data =>{
+          this.lineStationsIds = data;
+
+          for(this.i = 0; this.i < this.allStations.length; this.i++)
+          {
+            this.allStations[this.i].Exist = false;
+            for(this.j = 0; this.j < data.length; this.j++)
+            {
+              if(this.allStations[this.i].Id == data[this.j]){
+                    this.allStations[this.i].Exist = true;
+                  console.log("Bla bla" + this.allStations[this.i].Name);
+                  break;
+              }
+            }
+          }
+
+          
+      }
+    );
   }
 
   addLine(){
-    this.linesService.addLine(this.stationsId, this.addLineForm.controls.lineName.value, this.addLineForm.controls.lineType.value).subscribe(
+    this.linesService.addLine(this.lineStationsIds, this.addLineForm.controls.lineName.value, this.addLineForm.controls.lineType.value).subscribe(
       data => {
         this.getLines();
         //window.alert("Uspesno dodana linija" + data.Id);
         this.addLineForm.reset();
+        for(this.i = 0; this.i < this.allStations.length; this.i++)
+        {
+          this.allStations[this.i].Exist = false;
+        }
+
       }
     );
  
@@ -78,13 +104,18 @@ export class LinijeComponent implements OnInit {
         window.alert("Linija je uspesno obrisana " + this.selectValue);
         this.selectValue = "";
         this.editOrRemoveLineForm.reset();
+        for(this.i = 0; this.i < this.allStations.length; this.i++)
+        {
+          this.allStations[this.i].Exist = false;
+        }
+
       }
     );
   }
 
   editLine()
   {
-    this.linesService.editLine(this.editOrRemoveLineForm.value, this.selectValue).subscribe(
+    this.linesService.editLine(this.editOrRemoveLineForm.controls.lineName.value, this.editOrRemoveLineForm.controls.lineType.value, this.selectValue, this.lineStationsIds).subscribe(
       data =>{
         this.getLines();
         window.alert("USPESNO MENJANJE LINIJE SA ID: " + this.selectValue);
@@ -107,15 +138,15 @@ export class LinijeComponent implements OnInit {
       console.log(event.currentTarget.checked);
       if(event.currentTarget.checked)
       {
-        this.stationsId.push(id);
+        this.lineStationsIds.push(id);
       }
       else
       {
-        for(this.i = 0; this.i < this.stationsId.length; this.i++)
+        for(this.i = 0; this.i < this.lineStationsIds.length; this.i++)
         {
-            if(this.stationsId[this.i] == id)
+            if(this.lineStationsIds[this.i] == id)
             {
-              this.stationsId = this.stationsId.filter(s =>s != id);
+              this.lineStationsIds = this.lineStationsIds.filter(s =>s != id);
             }
         }
       }

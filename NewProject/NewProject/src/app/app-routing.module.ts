@@ -8,6 +8,7 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { StanicaComponent } from './components/stanica/stanica.component';
 import { RasporedComponent} from './components/raspored/raspored.component';
 import { LinijeComponent} from './components/linije/linije.component';
+import { CenovnikAdminComponent } from './components/cenovnik-admin/cenovnik-admin/cenovnik-admin.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'linije',
     component: LinijeComponent
+  },
+  {
+    path: 'cenovnik-admin',
+    component: CenovnikAdminComponent
   }
 ];
 

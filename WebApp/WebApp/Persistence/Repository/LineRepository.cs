@@ -14,11 +14,29 @@ namespace WebApp.Persistence.Repository
 
         }
 
-        public void EditLine(Line line, int id)
+        public void EditLine(string lineName, LineType lineType, int id, List<int> stations)
         {
 
-            ((ApplicationDbContext)this.context).Lines.Where(l => l.Id == id).First().LineName = line.LineName;
-            ((ApplicationDbContext)this.context).Lines.Where(l => l.Id == id).First().LineType = line.LineType;
+            ((ApplicationDbContext)this.context).Lines.Where(l => l.Id == id).First().LineName = lineName;
+            ((ApplicationDbContext)this.context).Lines.Where(l => l.Id == id).First().LineType = lineType;
+
+            foreach (int station in stations)
+            {
+                if ((((ApplicationDbContext)this.context).StationLines.Where(sl => sl.IdLine == id).Select(i => i.IdStation).Contains(station)) == false)
+                {
+                    ((ApplicationDbContext)this.context).StationLines.Add(new StationLine { IdLine = id, IdStation = station });
+                }
+
+            }
+
+            foreach (var v in ((ApplicationDbContext)this.context).StationLines.Where(sl => sl.IdLine == id))
+            {
+                if (!stations.Contains(v.IdStation))
+                {
+                    ((ApplicationDbContext)this.context).StationLines.Remove(v);
+
+                }
+            }
            
         }
 
@@ -29,6 +47,19 @@ namespace WebApp.Persistence.Repository
                 ((ApplicationDbContext)this.context).StationLines.Add(new StationLine { IdLine = lineId, IdStation = station});
 
             }
+        }
+
+        public void DeleteStations(int id)
+        {
+            foreach(var v in ((ApplicationDbContext)this.context).StationLines.Where(sl => sl.IdLine == id))
+            {
+                ((ApplicationDbContext)this.context).StationLines.Remove(v);
+            }
+        }
+
+        public IQueryable<int> FindLineStations(int lineId)
+        {
+            return ((ApplicationDbContext)this.context).StationLines.Where(sl => sl.IdLine == lineId).Select(i => i.IdStation);
         }
     }
 }

@@ -98,7 +98,7 @@ export class StanicaComponent implements OnInit {
         }
       );
      
-      }  
+    }  
   }
 
 

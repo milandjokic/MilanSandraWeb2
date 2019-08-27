@@ -38,5 +38,13 @@ namespace WebApp.Persistence.Repository
 
             return linesName;
         }
+
+        public void DeleteStationsLines(int id)
+        {
+            foreach (var v in ((ApplicationDbContext)this.context).StationLines.Where(sl => sl.IdStation == id))
+            {
+                ((ApplicationDbContext)this.context).StationLines.Remove(v);
+            }
+        }
     }
 }
