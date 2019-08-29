@@ -9,6 +9,7 @@ import { StanicaComponent } from './components/stanica/stanica.component';
 import { RasporedComponent} from './components/raspored/raspored.component';
 import { LinijeComponent} from './components/linije/linije.component';
 import { CenovnikAdminComponent } from './components/cenovnik-admin/cenovnik-admin/cenovnik-admin.component';
+import { RedvoznjeAdminComponent } from './components/redvoznje-admin/redvoznje-admin/redvoznje-admin.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'cenovnik-admin',
     component: CenovnikAdminComponent
+  },
+  {
+    path: 'redvoznje-admin',
+    component: RedvoznjeAdminComponent
   }
 ];
 

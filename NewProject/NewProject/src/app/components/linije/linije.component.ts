@@ -86,6 +86,7 @@ export class LinijeComponent implements OnInit {
         this.getLines();
         //window.alert("Uspesno dodana linija" + data.Id);
         this.addLineForm.reset();
+        this.getAllStations();
         for(this.i = 0; this.i < this.allStations.length; this.i++)
         {
           this.allStations[this.i].Exist = false;
@@ -104,6 +105,7 @@ export class LinijeComponent implements OnInit {
         window.alert("Linija je uspesno obrisana " + this.selectValue);
         this.selectValue = "";
         this.editOrRemoveLineForm.reset();
+        this.getAllStations();
         for(this.i = 0; this.i < this.allStations.length; this.i++)
         {
           this.allStations[this.i].Exist = false;
@@ -120,6 +122,11 @@ export class LinijeComponent implements OnInit {
         this.getLines();
         window.alert("USPESNO MENJANJE LINIJE SA ID: " + this.selectValue);
         this.editOrRemoveLineForm.reset();
+        this.getAllStations();
+        for(this.i = 0; this.i < this.allStations.length; this.i++)
+        {
+          this.allStations[this.i].Exist = false;
+        }
       }
     );
   }

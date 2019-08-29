@@ -36,6 +36,26 @@ namespace WebApp.Persistence.Repository
             List<Line> Lines = ((ApplicationDbContext)context).Lines.Where(c => c.LineType == lineType).ToList();
             return Lines;
         }
+
+
+        public void addDepartures(int lineId, DayType dayType, string[] departures)
+        {
+            int idTimetableActive = ((ApplicationDbContext)this.context).TimetableActives.Where(ta => ta.Active == true).Select(i => i.Id).First();
+
+            int idDay = ((ApplicationDbContext)this.context).Days.Where(d => d.dayType == dayType).Select(i => i.Id).First();
+            foreach (string s in departures)
+            {
+                if (!((ApplicationDbContext)this.context).Timetables.Where(t => t.IdLine == lineId && t.IdTimetableActive == idTimetableActive).Select(d => d.Departures).Contains(s))
+                {
+                    ((ApplicationDbContext)this.context).Timetables.Add(new Timetable() { IdLine = lineId, IdDay = idDay, IdTimetableActive = idTimetableActive, Departures = s });
+                }
+            }
+        }
+
+        public void editDeparture(int departureId, string departure)
+        {
+            ((ApplicationDbContext)this.context).Timetables.Where(t => t.Id == departureId).First().Departures = departure;
+        }
     }
 
 }

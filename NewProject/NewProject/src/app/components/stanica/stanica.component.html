@@ -2,12 +2,17 @@
 <div class="login-page column">
   <div>
       <div class="form">
-        <form class="login-form" [formGroup]="addStationForm" (ngSubmit)="addStation()">
+        <form class="login-form" [formGroup]="addStationForm">
           <input formControlName="name" type="text" placeholder="Ime"/>
           <input formControlName="address" type="text" placeholder="Adresa"/>
           <input formControlName="xCoordinate" type="text" placeholder="X koordinata"/>
           <input formControlName="yCoordinate" type="text" placeholder="Y koordinata"/>
-          <button type="submit" [disabled]="!addStationForm.valid">Dodaj stanicu</button>
+          <div *ngIf="addStationForm.valid">
+              <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="addStation()">Dodaj stanicu</button>
+            </div>
+            <div *ngIf="!addStationForm.valid">
+              <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!addStationForm.valid">Dodaj stanicu</button>
+            </div><br>
         </form>
       </div>
     </div>
@@ -21,9 +26,19 @@
             <input formControlName="address" type="text" placeholder="Adresa"/>
             <input formControlName="xCoordinate" type="text" placeholder="X koordinata"/>
             <input formControlName="yCoordinate" type="text" placeholder="Y koordinata"/>
-            <button type="submit" [disabled]="!editOrRemoveStationForm.valid" (click)="editStation()">Promeni stanicu</button>
+            <div *ngIf="editOrRemoveStationForm.valid">
+                <button class="btn btn-lg btn-primary text-uppercase active" (click)="editStation()">Uredi stanicu</button>
+              </div>
+              <div *ngIf="!editOrRemoveStationForm.valid">
+                <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!editOrRemoveStationForm.valid">Uredi stanicu</button>
+              </div>
             <br><br>
-            <button (click)="deleteStation()">Obrisi stanicu</button>
+            <div *ngIf="editOrRemoveStationForm.valid">
+                <button class="btn btn-lg btn-primary text-uppercase active" (click)="deleteStation()">Obrisi stanicu</button>
+              </div>
+              <div *ngIf="!editOrRemoveStationForm.valid">
+                  <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!editOrRemoveStationForm.valid">Obrisi stanicu</button>
+              </div>
           </form>
           <div>
             <label>Linije</label>

@@ -21,6 +21,7 @@ import { StanicaComponent } from './components/stanica/stanica.component';
 import { RasporedComponent } from './components/raspored/raspored.component';
 import { LinijeComponent } from './components/linije/linije.component';
 import { CenovnikAdminComponent } from './components/cenovnik-admin/cenovnik-admin/cenovnik-admin.component';
+import { RedvoznjeAdminComponent } from './components/redvoznje-admin/redvoznje-admin/redvoznje-admin.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CenovnikAdminComponent } from './components/cenovnik-admin/cenovnik-adm
     MapComponent,
     RasporedComponent,
     LinijeComponent,
-    CenovnikAdminComponent
+    CenovnikAdminComponent,
+    RedvoznjeAdminComponent
   ],
   imports: [
     BrowserModule,

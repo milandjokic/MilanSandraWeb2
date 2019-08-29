@@ -17,8 +17,18 @@ export class CenovnikAdminComponent implements OnInit {
     to: [''],
    });
 
+   pricelistAddForm = this.fb.group({
+    timeTicket : ['', Validators.required],
+    dayTicket : ['', Validators.required],
+    monthTicket : ['', Validators.required],
+    yearTicket : ['', Validators.required],
+    from: [''],
+    to: [''],
+   });
+
    pricelist: any;
    prices: any[] = [];
+   date : Date = new Date;
 
   constructor(private fb: FormBuilder, private cenovnikAdminService: CenovnikAdminService) { }
 
@@ -37,10 +47,18 @@ export class CenovnikAdminComponent implements OnInit {
         this.pricelistForm.controls.to.setValue(this.pricelist.End);
       }
     );
+
+    this.pricelistAddForm.controls.from.setValue(this.date.toLocaleDateString());
   }
 
   editPricelist(){
     this.cenovnikAdminService.editPricelist(this.pricelist.Id, this.pricelistForm.controls.timeTicket.value, this.pricelistForm.controls.dayTicket.value, this.pricelistForm.controls.monthTicket.value, this.pricelistForm.controls.yearTicket.value).subscribe();
+  }
+
+  addPricelist(){
+    console.log(this.pricelistAddForm.controls.to.value);
+    const controls = this.pricelistAddForm.controls;
+    this.cenovnikAdminService.addPriceList(controls.to.value, controls.timeTicket.value, controls.dayTicket.value, controls.monthTicket.value, controls.yearTicket.value).subscribe();
   }
 
 }

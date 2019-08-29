@@ -107,20 +107,20 @@ namespace WebApp.Controllers
         }
 
         // POST: api/PricelistItems
-        [ResponseType(typeof(PricelistItem))]
-        public IHttpActionResult PostPricelistItem(PricelistItem pricelistItem)
+        [Route("AddPricelist")]
+        public IHttpActionResult AddPricelist(DateTime to, double timeTicket, double dayTicket, double monthTicket, double yearTicket)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            UnitOfWork.PricelistItemRepository.Add(pricelistItem);
-
-           // db.PricelistItems.Add(pricelistItem);
+            UnitOfWork.PricelistItemRepository.addPricelist(to, timeTicket, dayTicket, monthTicket, yearTicket);
+            UnitOfWork.PricelistItemRepository.SaveChanges();
+            UnitOfWork.PricelistItemRepository.addPricelistItem(timeTicket, dayTicket, monthTicket, yearTicket);
             UnitOfWork.PricelistItemRepository.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = pricelistItem.Id }, pricelistItem);
+            return Ok(0);
         }
 
         // DELETE: api/PricelistItems/5

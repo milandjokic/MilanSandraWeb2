@@ -18,4 +18,8 @@ export class CenovnikAdminService {
      
   }
 
+  addPriceList(to: any, timeTicket: any, dayTicket: any, monthTicket: any, yearTicket: any): Observable<any[]>{
+    return this.http.post<any[]>(`http://localhost:52295/api/PricelistItems/AddPricelist?to=${to}&timeTicket=${timeTicket}&dayTicket=${dayTicket}&monthTicket=${monthTicket}&yearTicket=${yearTicket}`, [to, timeTicket, dayTicket, monthTicket, yearTicket]);
+  }
+
 }

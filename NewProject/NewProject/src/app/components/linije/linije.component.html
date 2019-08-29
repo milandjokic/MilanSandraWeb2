@@ -2,7 +2,7 @@
   <div class="login-page column">
     <div>
         <div class="form">
-          <form class="login-form" [formGroup]="addLineForm" (ngSubmit)="addLine()">
+          <form class="login-form" [formGroup]="addLineForm">
             <input formControlName="lineName" type="text" placeholder="Ime"/>
             <br>
             <div>
@@ -12,12 +12,19 @@
             </select>
             </div>
             <br>
+            <div class="form-label-group">
             <div *ngFor="let s of allStations">
                <input type="checkbox" isChecked [checked]="s.Exist" value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
             </div>
+          </div>
             <br>
             <br>
-            <button type="submit" [disabled]="!addLineForm.valid">Dodaj liniju</button>
+            <div *ngIf="addLineForm.valid">
+                <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="addLine()">Dodaj liniju</button>
+              </div>
+              <div *ngIf="!addLineForm.valid">
+                <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!addLineForm.valid">Dodaj liniju</button>
+              </div><br>
           </form>
         </div>
       </div>
@@ -38,9 +45,19 @@
     
                 </div>
                 <br>
-              <button type="submit" [disabled]="!editOrRemoveLineForm.valid" (click)="editLine()">Promeni liniju</button>
-              <br><br>
-              <button (click)="deleteLine()">Obrisi liniju</button>
+              <div *ngIf="editOrRemoveLineForm.valid">
+                  <button class="btn btn-lg btn-primary text-uppercase active" (click)="editLine()">Promeni liniju</button>
+                </div>
+                <div *ngIf="!editOrRemoveLineForm.valid">
+                  <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!editOrRemoveLineForm.valid">Promeni liniju</button>
+                </div>
+                <br>
+                <div *ngIf="editOrRemoveLineForm.valid">
+                  <button class="btn btn-lg btn-primary text-uppercase active" (click)="deleteLine()">Obrisi liniju</button>
+                </div>
+                <div *ngIf="!editOrRemoveLineForm.valid">
+                    <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!editOrRemoveLineForm.valid">Obrisi liniju</button>
+                </div>
             </form>
           </div>
       </div>
