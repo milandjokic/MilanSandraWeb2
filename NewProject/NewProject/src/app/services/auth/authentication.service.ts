@@ -16,7 +16,7 @@ export class AuthenticationService {
     return this.httpClient.post(this.base_url+"/api/Account/Register", user);
   }
 
-  login(email: string, password: string){
+  login(email: any, password: any){
     let data = `username=${email}&password=${password}&grant_type=password`;
     let headers = new HttpHeaders();
     headers = headers.append("Content-type", "application/x-www-fore-urlencoded");

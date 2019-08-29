@@ -31,4 +31,11 @@ namespace WebApp.Models
         City = 0,
         Suburban = 1,
     }
+
+    public enum RequestType
+    {
+        InProcess = 0,
+        Activated = 1,
+        Declined = 2,
+    }
 }

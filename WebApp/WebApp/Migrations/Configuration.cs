@@ -59,6 +59,14 @@ namespace WebApp.Migrations
                 userManager.AddToRole(user.Id, "Admin");
             }
 
+            if (!context.Users.Any(u => u.UserName == "controller@yahoo.com"))
+            {
+                var user = new ApplicationUser() { Id = "controller", UserName = "controller@yahoo.com", Email = "controller@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Kontroler123!") };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "Controller");
+            }
+
+
             if (!context.Users.Any(u => u.UserName == "appu@yahoo.com"))
             {
                 var user = new ApplicationUser() { Id = "appu", UserName = "appu@yahoo.com", Email = "appu@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Appu123!") };
@@ -79,7 +87,7 @@ namespace WebApp.Migrations
                     Image = "",
                     UserType = UserType.RegularUser,
                     Address = "Dinka Simunovica 88",
-                    Activated = true
+                    Activated = RequestType.Activated
                 };
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "AppUser");

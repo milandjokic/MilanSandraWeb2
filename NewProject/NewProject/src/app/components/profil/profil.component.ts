@@ -17,7 +17,8 @@ export class ProfilComponent implements OnInit {
     email : [''],
     dateOfBirth : ['', Validators.required],
     address : ['', Validators.required],
-    image : ['']
+    image : [''],
+    activated: ['', Validators.required]
   });
 
   userData: any;
@@ -66,6 +67,10 @@ export class ProfilComponent implements OnInit {
         {
           this.profileForm.controls.email.setValue(this.userData.Email);
         }
+        
+          console.log(this.userData.Activated);
+          this.profileForm.controls.activated.setValue(this.userData.Activated);
+        
         /*if(this.userData.Password)
         {  
           this.profileForm.controls.password.setValue(this.userData.Password);

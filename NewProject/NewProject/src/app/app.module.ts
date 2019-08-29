@@ -22,6 +22,8 @@ import { RasporedComponent } from './components/raspored/raspored.component';
 import { LinijeComponent } from './components/linije/linije.component';
 import { CenovnikAdminComponent } from './components/cenovnik-admin/cenovnik-admin/cenovnik-admin.component';
 import { RedvoznjeAdminComponent } from './components/redvoznje-admin/redvoznje-admin/redvoznje-admin.component';
+import { ValidacijaKorisnikaComponent } from './components/validacija-korisnika/validacija-korisnika.component';
+import { ValidacijaKarataComponent } from './components/validacija-karata/validacija-karata.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { RedvoznjeAdminComponent } from './components/redvoznje-admin/redvoznje-
     RasporedComponent,
     LinijeComponent,
     CenovnikAdminComponent,
-    RedvoznjeAdminComponent
+    RedvoznjeAdminComponent,
+    ValidacijaKorisnikaComponent,
+    ValidacijaKarataComponent
   ],
   imports: [
     BrowserModule,

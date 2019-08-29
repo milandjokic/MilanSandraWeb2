@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -16,6 +18,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApp.Models;
 using WebApp.Persistence;
+using WebApp.Persistence.UnitOfWork;
 using WebApp.Providers;
 using WebApp.Results;
 
@@ -26,10 +29,21 @@ namespace WebApp.Controllers
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
+
+        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IUnitOfWork UnitOfWork;
         private ApplicationUserManager _userManager;
+
+
 
         public AccountController()
         {
+        }
+
+        public AccountController(ApplicationUserManager userManager, IUnitOfWork uw)
+        {
+            _userManager = userManager;
+            UnitOfWork = uw;
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -73,6 +87,50 @@ namespace WebApp.Controllers
         {
             ApplicationUser user = UserManager.FindByEmail(email);
             return user;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetNotActiveUsers")]
+        [ResponseType(typeof(IQueryable<ApplicationUser>))]
+        public IQueryable<ApplicationUser> GetNotActiveUsers()
+        {
+            List<ApplicationUser> ret = new List<ApplicationUser>();
+            foreach (var user in UserManager.Users.Where(p => p.Activated == RequestType.InProcess))
+            {
+                if (UserManager.IsInRole(user.Id, "AppUser"))
+                {
+                    ret.Add(user);
+                }
+            }
+            return ret.AsQueryable();
+        }
+
+        [Route("ValidateUser")]
+        [ResponseType(typeof(Task<IHttpActionResult>))]
+        public async Task<IHttpActionResult> ValidateUser(string email, bool validate)
+        {
+            ApplicationUser applicationUser = UserManager.FindByEmail(email);
+
+            if (validate)
+            {
+
+                applicationUser.Activated = RequestType.Activated;
+            }
+            else
+            {
+
+                applicationUser.Activated = RequestType.Declined;
+            }
+
+            IdentityResult result = await UserManager.UpdateAsync(applicationUser);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok(200);
         }
 
         // POST api/Account/Logout
@@ -393,10 +451,18 @@ namespace WebApp.Controllers
                         Address = model.Address,
                         DateOfBirth = model.DateOfBirth,
                         UserType = model.UserType,
-                        
+                       
 
             };
 
+            if (user.UserType == UserType.RegularUser)
+            {
+                user.Activated = RequestType.Activated;
+            }
+            else
+            {
+                user.Activated = RequestType.InProcess;
+            }
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -412,7 +478,7 @@ namespace WebApp.Controllers
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            return Ok(200);
         }
 
         // POST api/Account/RegisterExternal

@@ -1,6 +1,16 @@
 <div class="login-page">
   <div class="form">
     <form class="login-form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="profileForm.controls.activated.value == 0 && role == 'AppUser'">
+         <button type="button" class="btn btn-info" disabled>Validacija profila u procesu...</button>
+      </div>
+      <div *ngIf="profileForm.controls.activated.value == 1 && role == 'AppUser'">
+          <button type="button" class="btn btn-info" disabled>Aktiviran</button>
+       </div>
+       <div *ngIf="profileForm.controls.activated.value == 2 && role == 'AppUser'">
+          <button type="button" class="btn btn-warning" disabled>Odbijen</button>
+       </div>
+      <br>
       <span> Ime </span>
       <input formControlName="name" type="text" placeholder="Ime"/><br><br>
       <span> Pezime </span>

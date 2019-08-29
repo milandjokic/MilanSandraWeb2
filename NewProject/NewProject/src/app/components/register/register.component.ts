@@ -47,6 +47,36 @@ export class RegisterComponent implements OnInit {
   onSubmit(){
     let data = this.registerForm.value;
     this.authService.register(data).subscribe();
+    window.location.href = "/login";
+    //this.login(this.registerForm.controls.email.value, this.registerForm.controls.password.value);
+   
   }
+
+  /*login(email: string, password: string)
+  {
+    console.log(this.registerForm.controls.email.value + this.registerForm.controls.password.value);
+    this.authService.login(email, password).subscribe(
+      res => {
+        console.log(res.access_token);
+
+        let jwt = res.access_token;
+        let jwtData = jwt.split('.')[1]
+        let decodedJwtJasonData = window.atob(jwtData)
+        let decodetJwtData = JSON.parse(decodedJwtJasonData)
+
+        let role = decodetJwtData.role
+
+        console.log('jwtData: ' + jwtData)
+        console.log('decodedJwtJsonData: ' + decodedJwtJasonData)
+        console.log(decodetJwtData)
+        console.log('Role: ' + role)
+        let a = decodetJwtData.unique_name
+        localStorage.setItem('jwt', jwt)
+        localStorage.setItem('role', role)
+        localStorage.setItem('name',a);
+        window.location.href = "/profil"
+      }
+    );
+  }*/
 
 }

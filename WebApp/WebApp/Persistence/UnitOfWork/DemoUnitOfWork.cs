@@ -27,6 +27,8 @@ namespace WebApp.Persistence.UnitOfWork
         public IStationRepository StationRepository { get; set; }
         [Dependency]
         public ILineRepository LineRepository { get; set; }
+        [Dependency]
+        public IUserRepository UserRepository { get; set; }
 
         public int Complete()
         {

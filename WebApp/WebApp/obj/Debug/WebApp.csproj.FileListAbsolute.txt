@@ -303,3 +303,4 @@ C:\Users\Admin\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.csproj.Cor
 C:\Users\Admin\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.csproj.CopyComplete
 C:\Users\Admin\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\Admin\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.pdb
+C:\Users\Admin\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.Migrations.Sixth.resources

@@ -53,14 +53,14 @@ export class KarteComponent implements OnInit {
         this.userProfileType = this.userData.UserType;
         if(!this.userProfileActivated)
         {
-          this.userProfileType = 'RegularUser';
+          this.userProfileType = 0;
         }
         this.cenovnikService.getTicketPrice(this.choosenTicketType, this.userProfileType).subscribe( data => this.price = data);
       });
       }
       else
       {
-        this.cenovnikService.getTicketPrice(this.choosenTicketType, 'RegularUser').subscribe( data => this.price = data);
+        this.cenovnikService.getTicketPrice(this.choosenTicketType, '0').subscribe( data => this.price = data);
       }
   }
 

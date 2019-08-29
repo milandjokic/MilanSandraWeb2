@@ -10,6 +10,8 @@ import { RasporedComponent} from './components/raspored/raspored.component';
 import { LinijeComponent} from './components/linije/linije.component';
 import { CenovnikAdminComponent } from './components/cenovnik-admin/cenovnik-admin/cenovnik-admin.component';
 import { RedvoznjeAdminComponent } from './components/redvoznje-admin/redvoznje-admin/redvoznje-admin.component';
+import { ValidacijaKorisnikaComponent } from './components/validacija-korisnika/validacija-korisnika.component';
+import { ValidacijaKarataComponent } from './components/validacija-karata/validacija-karata.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,14 @@ const routes: Routes = [
   {
     path: 'redvoznje-admin',
     component: RedvoznjeAdminComponent
+  },
+  {
+    path : 'validacija-korisnika',
+    component: ValidacijaKorisnikaComponent
+  },
+  {
+    path : 'validacija-karata' ,
+    component: ValidacijaKarataComponent
   }
 ];
 

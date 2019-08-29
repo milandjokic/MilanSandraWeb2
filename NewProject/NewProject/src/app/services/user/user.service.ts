@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/models/korisnik';
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +22,9 @@ export class UserService {
   remove(user): Observable<any>{
     return this.httpClient.post(`http://localhost:52295/api/Account/RemoveUser`, user);
   }
+  getNotActiveUsers() : Observable<User[]>
+  {
+    return this.httpClient.get<User[]>(`http://localhost:52295/api/Account/GetNotActiveUsers`);
+  }
+ 
 }

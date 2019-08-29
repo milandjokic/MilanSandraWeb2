@@ -1,6 +1,6 @@
 <nav>
   <ul>
-    <div *ngIf="userRole != 'Admin'">
+    <div *ngIf="userRole != 'Admin' && userRole != 'Controller'">
       <li><a routerLink="/">Mreza linija</a></li>
       <li><a routerLink="/raspored">Red voznje</a></li>
       <li><a routerLink="/">Trenutna lokacija</a></li>
@@ -13,6 +13,12 @@
       <li><a routerLink="/linije">Upravljaj linijama</a></li>
       <li><a routerLink="/redvoznje-admin">Upravljaj redovima voznje</a></li>
       <li><a routerLink="/cenovnik-admin">Upravljaj cenovnikom</a></li>
+    </div>
+
+    <div *ngIf="userRole == 'Controller'">
+      <li><a routerLink="/validacija-korisnika">Validacija korisnika</a></li>
+      <li><a routerLink="/validacija-karata">Validacija karata</a></li>
+      
     </div>
 
     <div *ngIf="!userRole" class="klasa">
