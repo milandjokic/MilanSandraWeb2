@@ -36,8 +36,8 @@
               </select>
         </ng-template>
         <br>-->
-      <div *ngIf="selectedUserType != 'RegularUser' && userProfileActivated == 'false'">
-        <input type="file" accept="image/*"  formControlName="image"/>
+      <div *ngIf="selectedUserType != 'RegularUser' &&  userProfileActivated != '1'">
+        <input type="file" accept="image/*" formControlName="image" (change)="onImageChange($event)"/>
       </div>
       <br>
       <div *ngIf="profileForm.valid">
@@ -52,6 +52,9 @@
       </div>
     </form>
     <br><br><br><br>
-    <img *ngIf="image" [src]="image" #imageControl>
+    <div *ngIf="role == 'AppUser'">
+      <img style="height: 300px; width:300px" *ngIf="image" [src]="image" #imageControl>
+
+    </div>
   </div>
 </div>

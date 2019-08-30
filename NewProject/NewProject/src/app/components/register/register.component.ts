@@ -62,6 +62,10 @@ export class RegisterComponent implements OnInit {
           this.userService.uploadImage(formData).subscribe();
           window.location.href = "/login";
         }
+        else
+        {
+          window.location.href = "/login";
+        }
       }
     );
     //this.login(this.registerForm.controls.email.value, this.registerForm.controls.password.value);

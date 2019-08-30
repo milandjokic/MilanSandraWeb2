@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { User } from 'src/app/models/korisnik';
 
 @Component({
   selector: 'app-profil',
@@ -27,20 +28,32 @@ export class ProfilComponent implements OnInit {
   tempDate = new Date();
   selectValue: any;
   role = localStorage['role'];
+  showFile : boolean;
 
   image: any = null;
+
+  imageFile: File = null;
 
   constructor(public router: Router, private fb: FormBuilder, private userService: UserService, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.getUser();
-
+    
     
   }
 
   onSelect(event : any)
   {
     this.selectValue = event.target.value;
+    //console.log(this.selectValue);
+    if(event.target.value != '0')
+    {
+     this.showFile = true; 
+    }
+    else
+    {
+      this.showFile = false;
+    }
   }
 
   getUser(){
@@ -57,6 +70,7 @@ export class ProfilComponent implements OnInit {
     console.log(`Email: ${this.userData.Email}`);
 
     this.userProfileActivated = this.userData.Activated;
+    //console.log(this.userProfileActivated);
     if(this.userData.Name)
     {
       this.profileForm.controls.name.setValue(this.userData.Name);
@@ -79,9 +93,20 @@ export class ProfilComponent implements OnInit {
       this.profileForm.controls.email.setValue(this.userData.Email);
     }
     
-      console.log(this.userData.Activated);
+      //console.log(this.userData.Activated);
       this.profileForm.controls.activated.setValue(this.userData.Activated);
     
+      if(this.selectValue != '0')
+      {
+        if(this.userProfileActivated == '2')
+        {
+          this.showFile = true;
+        }
+      }
+      else
+      {
+        this.showFile = false;
+      }
     /*if(this.userData.Password)
     {  
       this.profileForm.controls.password.setValue(this.userData.Password);
@@ -108,25 +133,42 @@ export class ProfilComponent implements OnInit {
         this.profileForm.controls.userType.setValue(this.selectValue);
       }
     }*/
-    if(this.userData.Image)
-    {
-      this.profileForm.controls.image.setValue(this.userData.Image);
-    }
+    console.log(this.userData.Image);
 
-    this.userService.downloadImage(this.userData.Email).subscribe(
-      response => {
-        this.image = 'data:image/jpeg;base64,' + response;
-      }
-    );
+    if(this.role == "AppUser" && this.userData.Image != null)
+    {
+      this.userService.downloadImage(this.userData.Email).subscribe(
+        response => {
+          this.image = 'data:image/jpeg;base64,' + response;
+        }
+      );
+
+    }
   }
 
   onSubmit(){
-    this.userService.edit(this.profileForm.value).subscribe();
+    let formData = new FormData();
+
+    if(this.imageFile != null){
+      formData.append('image', this.imageFile, this.imageFile.name);
+      formData.append('email', this.profileForm.controls.email.value);
+    }
+
+    this.userService.edit(this.profileForm.value).subscribe(
+      response => {
+        this.userService.uploadImage(formData).subscribe();
+        window.location.href = "/profil";
+      }
+    );
   }
 
   delete(){
     this.userService.remove(this.profileForm.value).subscribe();
     this.authService.logout();
     window.location.href = '/login';
+  }
+
+  onImageChange(event: any){
+    this.imageFile = <File>event.target.files[0];
   }
 }

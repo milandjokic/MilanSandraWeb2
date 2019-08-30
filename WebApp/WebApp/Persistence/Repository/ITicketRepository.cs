@@ -11,5 +11,6 @@ namespace WebApp.Persistence.Repository
     {
         int GetPricelistsItem(TicketType ticketType);
         string GetIdByEmail(string email);
+        bool CheckTicket(int id);
     }
 }

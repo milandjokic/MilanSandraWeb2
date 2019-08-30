@@ -89,7 +89,7 @@ export class ValidacijaKorisnikaComponent implements OnInit {
       {
         this.profileForm.reset();
         this.getNoActiveUsers();
-
+        this.image = null;
       }
     );
   }
@@ -102,6 +102,7 @@ export class ValidacijaKorisnikaComponent implements OnInit {
       {
         this.profileForm.reset();
         this.getNoActiveUsers();
+        this.image = null;
       }
     );
   }

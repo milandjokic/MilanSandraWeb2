@@ -1,3 +1,22 @@
-<p>
-  validacija-karata works!
-</p>
+<div class="login-page">
+    <div class="form">
+      <form class="login-form" [formGroup]="validateTicketForm">
+          <span> Id karte </span>
+          <input formControlName="id" type="number" required />
+          <br>
+          <div *ngIf="!ticketValid && show">
+              <button type="button" class="btn btn-lg btn-block" disabled>Karta nije validna!</button>
+          </div>
+          <div *ngIf="ticketValid && show">
+              <button type="button" class="btn btn-lg btn-block" disabled>Karta je validna!</button>
+          </div>
+          <br>
+          <div *ngIf="validateTicketForm.valid">
+              <button class="btn btn-lg btn-primary text-uppercase active" (click)="check()">Proveri validnost</button>
+            </div>
+            <div *ngIf="!validateTicketForm.valid">
+              <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!validateTicketForm.valid">Proveri validnost</button>
+            </div>
+        </form>
+    </div>
+</div>

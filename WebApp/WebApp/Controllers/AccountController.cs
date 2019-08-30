@@ -115,12 +115,12 @@ namespace WebApp.Controllers
 
             if (validate)
             {
-
+                EmailHelper.SendEmail(email, "Validacija profila", "Vas profil je validan");
                 applicationUser.Activated = RequestType.Activated;
             }
             else
             {
-
+                EmailHelper.SendEmail(email, "Validacija profila", "Vas profil nije validan");
                 applicationUser.Activated = RequestType.Declined;
             }
 
@@ -143,6 +143,8 @@ namespace WebApp.Controllers
 
             var userEmail = httpRequest.Form["email"];
             var user = _userManager.Users.Where(userDB => userDB.Email == userEmail).First();
+            EmailHelper.SendEmail(userEmail, "Validacija profila", "Vas profil je u procesu obrade");
+
 
             try
             {
@@ -157,6 +159,7 @@ namespace WebApp.Controllers
                             var filePath = HttpContext.Current.Server.MapPath($"~/UploadFile/{fileName}");
 
                             user.Image = fileName;
+                            user.Activated = RequestType.InProcess;
                             IdentityResult result = await _userManager.UpdateAsync(user);
                             if(!result.Succeeded)
                             {
@@ -536,10 +539,12 @@ namespace WebApp.Controllers
 
             if (user.UserType == UserType.RegularUser)
             {
+                EmailHelper.SendEmail(user.Email, "Validacija profila", "Vas profil je validan");
                 user.Activated = RequestType.Activated;
             }
             else
             {
+                EmailHelper.SendEmail(user.Email, "Validacija profila", "Vas profil je u procesu obrade");
                 user.Activated = RequestType.InProcess;
             }
 

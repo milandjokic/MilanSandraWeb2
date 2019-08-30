@@ -12,4 +12,9 @@ export class KarteService {
   addTicket(ticketPrice: any, selectedTicketType: any, userName: any, email: any): Observable<any>{
     return this.http.post("http://localhost:52295/api/Tickets/Add", [ticketPrice, selectedTicketType, userName, email]);
   }
+
+  getTicket(id : any): Observable<any>{
+    return this.http.get<any>(`http://localhost:52295/api/Tickets/GetTicket?id=${id}`, id);
+  }
+
 }
