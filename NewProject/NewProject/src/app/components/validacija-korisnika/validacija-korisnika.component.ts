@@ -23,6 +23,7 @@ export class ValidacijaKorisnikaComponent implements OnInit {
   users : User[] = [];
   selectedUserEmail: any;
   i: number;
+  image: any = null;
 
   constructor(private fb: FormBuilder, private userService : UserService, private controllerService : KontrolerService) { }
 
@@ -49,6 +50,12 @@ export class ValidacijaKorisnikaComponent implements OnInit {
   {
     this.selectedUserEmail = event.target.value;
     this.populateForm();
+
+    this.userService.downloadImage(this.selectedUserEmail).subscribe(
+      response => {
+        this.image = 'data:image/jpeg;base64,' + response;
+        console.log(this.image);
+      });
   }
 
   populateForm()
@@ -66,6 +73,12 @@ export class ValidacijaKorisnikaComponent implements OnInit {
 
       }
     }
+
+    this.userService.downloadImage(this.selectedUserEmail).subscribe(
+      response => {
+        this.image = 'data:image/jpeg;base64,' + response;
+        console.log(this.image);
+      });
   }
 
   validate()
