@@ -49,7 +49,7 @@
           <option selected="selected" *ngFor="let k of userTypes"  [value] = "k">{{k}}</option> 
         </select>
         <div *ngIf="selectedUserType != 'RegularUser'">
-          <input type="file" accept="image/*"  formControlName="image"/>
+          <input type="file" accept="image/*" formControlName="image" (change)="onImageChange($event)"/>
         </div>
         <button type="submit" [disabled]="!registerForm.valid">Registracija</button>
       </form>

@@ -26,5 +26,11 @@ export class UserService {
   {
     return this.httpClient.get<User[]>(`http://localhost:52295/api/Account/GetNotActiveUsers`);
   }
+  uploadImage(image: any): Observable<any>{
+    return this.httpClient.post(`http://localhost:52295/api/Account/UploadImage/`, image);
+  }
+  downloadImage(email: string): Observable<any[]>{
+    return this.httpClient.get<any[]>(`http://localhost:52295/api/Account/DownloadImage?email=`+email);
+  }
  
 }

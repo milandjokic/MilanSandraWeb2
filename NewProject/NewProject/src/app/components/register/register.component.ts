@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 
 @Component({
@@ -28,7 +29,9 @@ export class RegisterComponent implements OnInit {
 
   }, {validator: this.checkPassword});
 
-  constructor(private fb: FormBuilder, private authService: AuthenticationService) { }
+  imageFile: File = null;
+
+  constructor(private fb: FormBuilder, private authService: AuthenticationService, private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -46,10 +49,27 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(){
     let data = this.registerForm.value;
-    this.authService.register(data).subscribe();
-    window.location.href = "/login";
+    let formData = new FormData();
+
+    if(this.imageFile != null){
+      formData.append('image', this.imageFile, this.imageFile.name);
+      formData.append('email', this.registerForm.controls.email.value);
+    }
+
+    this.authService.register(data).subscribe(
+      ret => {
+        if(this.imageFile != null){
+          this.userService.uploadImage(formData).subscribe();
+          window.location.href = "/login";
+        }
+      }
+    );
     //this.login(this.registerForm.controls.email.value, this.registerForm.controls.password.value);
    
+  }
+
+  onImageChange(event){
+    this.imageFile = <File>event.target.files[0];
   }
 
   /*login(email: string, password: string)
