@@ -1,0 +1,30 @@
+<div>
+  <select name="selectedLine" (change)="onSelectLine($event)">
+    <option *ngFor="let l of lines" [value] = "l.Id">{{l.LineName}}</option>
+  </select>
+
+  <br><br>
+
+  <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="14" style="height: 500px">
+    <div>
+      <agm-marker *ngFor="let station of stations" [latitude]="station.XCoordinate" [longitude]="station.YCoordinate" [title]="station.name" [label]="" [iconUrl]="iconPath">
+        <agm-info-window>
+          Name: {{station.Name}}
+          <br>
+          Longitude: {{station.YCoordinate}}
+          <br>
+          Latitude: {{station.XCoordinate}}
+          <br>
+          Address: {{station.Address}}
+        </agm-info-window>
+      </agm-marker>
+    </div>
+
+    <div>
+      <agm-polyline [strokeColor]="red">
+        <agm-polyline-point *ngFor="let point of selLine.path" [latitude]="point.latitude" [longitude]="point.longitude">
+        </agm-polyline-point>
+      </agm-polyline>
+    </div>
+  </agm-map>
+</div>

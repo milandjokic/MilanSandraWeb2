@@ -36,7 +36,7 @@
               </select>
         </ng-template>
         <br>-->
-      <div *ngIf="selectedUserType != 'RegularUser' &&  userProfileActivated != '1'">
+      <div *ngIf="selectedUserType != 'RegularUser' &&  userProfileActivated != '1' && role == 'AppUser'">
         <input type="file" accept="image/*" formControlName="image" (change)="onImageChange($event)"/>
       </div>
       <br>

@@ -25,6 +25,7 @@ import { RedvoznjeAdminComponent } from './components/redvoznje-admin/redvoznje-
 import { ValidacijaKorisnikaComponent } from './components/validacija-korisnika/validacija-korisnika.component';
 import { ValidacijaKarataComponent } from './components/validacija-karata/validacija-karata.component';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { MrezeLinijaComponent } from './components/mreze-linija/mreze-linija.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
     CenovnikAdminComponent,
     RedvoznjeAdminComponent,
     ValidacijaKorisnikaComponent,
-    ValidacijaKarataComponent
+    ValidacijaKarataComponent,
+    MrezeLinijaComponent
   ],
   imports: [
     BrowserModule,

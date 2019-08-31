@@ -12,6 +12,7 @@ import { CenovnikAdminComponent } from './components/cenovnik-admin/cenovnik-adm
 import { RedvoznjeAdminComponent } from './components/redvoznje-admin/redvoznje-admin/redvoznje-admin.component';
 import { ValidacijaKorisnikaComponent } from './components/validacija-korisnika/validacija-korisnika.component';
 import { ValidacijaKarataComponent } from './components/validacija-karata/validacija-karata.component';
+import { MrezeLinijaComponent } from './components/mreze-linija/mreze-linija.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path : 'validacija-karata' ,
     component: ValidacijaKarataComponent
+  },
+  {
+    path: 'mreza-linija',
+    component: MrezeLinijaComponent
   }
 ];
 
