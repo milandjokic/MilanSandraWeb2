@@ -12,5 +12,6 @@ namespace WebApp.Persistence.Repository
         int GetPricelistsItem(TicketType ticketType);
         string GetIdByEmail(string email);
         bool CheckTicket(int id);
+        void AddPayPal(string transactionId, string payerId, string payerEmail, int ticketId);
     }
 }

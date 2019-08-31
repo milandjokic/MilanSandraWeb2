@@ -69,7 +69,6 @@ export class LinijeComponent implements OnInit {
             {
               if(this.allStations[this.i].Id == data[this.j]){
                     this.allStations[this.i].Exist = true;
-                  console.log("Bla bla" + this.allStations[this.i].Name);
                   break;
               }
             }
@@ -141,8 +140,7 @@ export class LinijeComponent implements OnInit {
 
     checkValue(event : any, id: any)
     {
-      console.log(id);
-      console.log(event.currentTarget.checked);
+      
       if(event.currentTarget.checked)
       {
         this.lineStationsIds.push(id);

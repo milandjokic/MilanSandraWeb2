@@ -31,14 +31,13 @@ export class MapComponent implements OnInit {
   }
 
   placeMarker($event){
-    console.log(window.location.href);
     if(window.location.href == "http://localhost:4200/stanica")
     {
       this.coordChanged.emit(new Array(this.markerInfo.location.latitude,this.markerInfo.location.longitude));
     }
     else{
       this.polyline.addLocation(new GeoLocation($event.coords.lat, $event.coords.lng));
-      console.log(this.polyline);
+     
     }
   }
   

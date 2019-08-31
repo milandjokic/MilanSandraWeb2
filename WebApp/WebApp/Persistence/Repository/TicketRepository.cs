@@ -87,5 +87,10 @@ namespace WebApp.Persistence.Repository
             return false;
 
         }
+
+        public void AddPayPal(string transactionId, string payerId, string payerEmail, int ticketId)
+        {
+            ((ApplicationDbContext)this.context).PayPals.Add(new PayPal() { TransactionId = transactionId, PayerId = payerId, PayerEmail = payerEmail, IdTicket = ticketId });
+        }
     }
 }

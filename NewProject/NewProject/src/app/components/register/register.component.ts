@@ -14,8 +14,6 @@ export class RegisterComponent implements OnInit {
 
   userTypes = ['Student', 'Pensioner', 'RegularUser'];
   selectedUserType = 'RegularUser';
- // emailInUse: boolean = false;
-
   registerForm = this.fb.group({
     name : ['', Validators.required],
     lastname : ['', Validators.required],
@@ -75,32 +73,5 @@ export class RegisterComponent implements OnInit {
   onImageChange(event){
     this.imageFile = <File>event.target.files[0];
   }
-
-  /*login(email: string, password: string)
-  {
-    console.log(this.registerForm.controls.email.value + this.registerForm.controls.password.value);
-    this.authService.login(email, password).subscribe(
-      res => {
-        console.log(res.access_token);
-
-        let jwt = res.access_token;
-        let jwtData = jwt.split('.')[1]
-        let decodedJwtJasonData = window.atob(jwtData)
-        let decodetJwtData = JSON.parse(decodedJwtJasonData)
-
-        let role = decodetJwtData.role
-
-        console.log('jwtData: ' + jwtData)
-        console.log('decodedJwtJsonData: ' + decodedJwtJasonData)
-        console.log(decodetJwtData)
-        console.log('Role: ' + role)
-        let a = decodetJwtData.unique_name
-        localStorage.setItem('jwt', jwt)
-        localStorage.setItem('role', role)
-        localStorage.setItem('name',a);
-        window.location.href = "/profil"
-      }
-    );
-  }*/
 
 }

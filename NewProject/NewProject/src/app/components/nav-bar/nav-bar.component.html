@@ -1,34 +1,82 @@
+
 <nav>
-  <ul>
+    <ul>
+      <div *ngIf="userRole != 'Admin' && userRole != 'Controller'">
+        <li><a routerLink="/mreza-linija">Mreza linija</a></li>
+        <li><a routerLink="/raspored">Red voznje</a></li>
+        <li><a routerLink="/">Trenutna lokacija</a></li>
+        <li><a routerLink="/karte">Karte</a></li>
+        <li><a routerLink="/cenovnik" >Cenovnik</a></li>
+      </div>
+  
+      <div *ngIf="userRole == 'Admin'">
+        <li><a routerLink="/stanica">Upravljaj stanicama</a></li>
+        <li><a routerLink="/linije">Upravljaj linijama</a></li>
+        <li><a routerLink="/redvoznje-admin">Upravljaj redovima voznje</a></li>
+        <li><a routerLink="/cenovnik-admin">Upravljaj cenovnikom</a></li>
+      </div>
+  
+      <div *ngIf="userRole == 'Controller'">
+        <li><a routerLink="/validacija-korisnika">Validacija korisnika</a></li>
+        <li><a routerLink="/validacija-karata">Validacija karata</a></li>
+        
+      </div>
+  
+      <div *ngIf="!userRole" class="klasa">
+        <li><a routerLink="/login">Prijava</a></li>
+        <li><a routerLink="/register" >Registracija</a></li>    
+      </div>
+  
+      <div *ngIf="userRole" class="klasa">
+        <li><a routerLink="/profil">Moj Profil</a></li>
+        <li><a (click)="logout($event)" >Odjava</a></li>    
+      </div>
+    </ul>
+  </nav>
+<!--<div class="rounded-lg">
+    <div class="border">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <ul class="nav navbar-nav">
     <div *ngIf="userRole != 'Admin' && userRole != 'Controller'">
-      <li><a routerLink="/mreza-linija">Mreza linija</a></li>
-      <li><a routerLink="/raspored">Red voznje</a></li>
-      <li><a routerLink="/">Trenutna lokacija</a></li>
-      <li><a routerLink="/karte">Karte</a></li>
-      <li><a routerLink="/cenovnik" >Cenovnik</a></li>
+      <a routerLink="/mreza-linija"> Mreza linija </a>
+      <a routerLink="/raspored"> Red voznje </a>
+      <a routerLink="/"> Trenutna lokacija </a>
+      <a routerLink="/karte"> Karte </a>
+      <a routerLink="/cenovnik" > Cenovnik </a>
     </div>
 
     <div *ngIf="userRole == 'Admin'">
-      <li><a routerLink="/stanica">Upravljaj stanicama</a></li>
-      <li><a routerLink="/linije">Upravljaj linijama</a></li>
-      <li><a routerLink="/redvoznje-admin">Upravljaj redovima voznje</a></li>
-      <li><a routerLink="/cenovnik-admin">Upravljaj cenovnikom</a></li>
+      <a routerLink="/stanica">Upravljaj stanicama</a>
+      <a routerLink="/linije">Upravljaj linijama</a>
+      <a routerLink="/redvoznje-admin">Upravljaj redovima voznje</a>
+      <a routerLink="/cenovnik-admin">Upravljaj cenovnikom</a>
     </div>
 
     <div *ngIf="userRole == 'Controller'">
-      <li><a routerLink="/validacija-korisnika">Validacija korisnika</a></li>
-      <li><a routerLink="/validacija-karata">Validacija karata</a></li>
+      <a routerLink="/validacija-korisnika">Validacija korisnika</a>
+      <a routerLink="/validacija-karata">Validacija karata</a>
       
     </div>
+  </ul>
 
-    <div *ngIf="!userRole" class="klasa">
-      <li><a routerLink="/login">Prijava</a></li>
-      <li><a routerLink="/register" >Registracija</a></li>    
-    </div>
+  <div class="float-right">
+  <ul class="nav navbar-nav navbar-right">
+ 
+    <div *ngIf="!userRole">
+      <a routerLink="/login"> <span  class="glyphicon glyphicon-log-in"></span>Prijava</a>
+      <a routerLink="/register"><span class="glyphicon glyphicon-user"></span>Registracija</a>    
+  </div>
 
-    <div *ngIf="userRole" class="klasa">
-      <li><a routerLink="/profil">Moj Profil</a></li>
-      <li><a (click)="logout($event)" >Odjava</a></li>    
+ 
+    <div *ngIf="userRole">
+      <a routerLink="/profil"><span  class="glyphicon glyphicon-user"></span>Moj Profil</a>
+      <a (click)="logout($event)"><span class="glyphicon glyphicon-log-in"></span>Odjava</a>  
     </div>
   </ul>
+</div>
 </nav>
+</div>
+</div>
+
+-->
+  

@@ -23,6 +23,7 @@ export class KarteComponent implements OnInit {
   email: any;
   temp: any;
   isLoggedIn: boolean;
+  priceEur : number;
 
   public payPalConfig?: IPayPalConfig;
   showSuccess: boolean;
@@ -41,7 +42,6 @@ export class KarteComponent implements OnInit {
     this.getUser();
     this.initConfig();
     this.temp = localStorage['name'];
-    console.log("Temp: " + this.temp);
     if(this.temp){
       this.isLoggedIn = true;
     }
@@ -71,12 +71,22 @@ export class KarteComponent implements OnInit {
         {
           this.userProfileType = 0;
         }
-        this.cenovnikService.getTicketPrice(this.choosenTicketType, this.userProfileType).subscribe( data => this.price = data);
+        this.cenovnikService.getTicketPrice(this.choosenTicketType, this.userProfileType).subscribe( data =>
+          {
+            this.price = data;
+            this.priceEur = this.price * 0.0085;
+
+          });
       });
       }
       else
       {
-        this.cenovnikService.getTicketPrice(this.choosenTicketType, '0').subscribe( data => this.price = data);
+        this.cenovnikService.getTicketPrice(this.choosenTicketType, '0').subscribe( data => 
+          {
+            this.price = data;
+            this.priceEur = this.price * 0.0085;
+          });
+            
       }
   }
 
@@ -85,19 +95,11 @@ export class KarteComponent implements OnInit {
     window.alert("You've buyed a ticked");
   }
 
-   //PayPal
+  
    private initConfig(): void {
-    
-   
-    /*var diffDays =this.priceWDiscount;
-.
-    console.log("cena u dinarima: ", diffDays);
-    diffDays = diffDays/118;
-    var str = diffDays.toFixed(2);
-    console.log("cena u evrima: ", str);*/
 
     this.payPalConfig = {
-      currency: 'EUR',//ATniFSIBK8rHNVLG_PetS-skYOy0lfhJw1m7IlrlHhqLzAC7_HaD1fNQPX_y8nDiTvtfyn7uyQEyofp6
+      currency: 'EUR',
       clientId: 'ATniFSIBK8rHNVLG_PetS-skYOy0lfhJw1m7IlrlHhqLzAC7_HaD1fNQPX_y8nDiTvtfyn7uyQEyofp6',
       
 
@@ -106,11 +108,11 @@ export class KarteComponent implements OnInit {
           purchase_units: [{
               amount: {
                   currency_code: 'EUR',
-                  value: '1',
+                  value: this.priceEur.toPrecision(2),
                   breakdown: {
                       item_total: {
                           currency_code: 'EUR',
-                          value: '1'
+                          value: this.priceEur.toPrecision(2)
                       }
                   }
               },
@@ -120,7 +122,7 @@ export class KarteComponent implements OnInit {
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
                       currency_code: 'EUR',
-                      value: '1',
+                      value: this.priceEur.toPrecision(2),
                   },
               }]
           }]
@@ -136,15 +138,10 @@ export class KarteComponent implements OnInit {
 
       onApprove: (data, actions) => {
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
-          //actions.order.get().then(details => {
-            //  console.log('onApprove - you can get full order details inside onApprove: ', details);
-         // });
-
-      },//data.id, data.payer.email_address, data.payer.payer_id, this.price, this.selectedTicketType, this.userProfileType
+      },
       onClientAuthorization: (data) => {
           console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-          //this.buyTimeTicket(data);
-          console.log("USO SAM" + this.email + data);
+          
           if(!this.loggedIn){
             this.userProfileType = 0;
             
@@ -154,17 +151,17 @@ export class KarteComponent implements OnInit {
       },
       onCancel: (data, actions) => {
           console.log('OnCancel', data, actions);
-         // this.showCancel = true;
+         
 
       },
       onError: err => {
         window.alert("Something went wrong!");
           console.log('OnError', err);
-          //this.showError = true;
+          
       },
       onClick: (data, actions) => {
           console.log('onClick', data, actions);
-          //this.resetStatus();
+          
       },
   };
 }

@@ -9,7 +9,6 @@ export class TokenInterceptor implements HttpInterceptor{
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
         let jwt = localStorage.jwt;
-        console.log(req);
         if(jwt){
             req = req.clone({
                 setHeaders: {

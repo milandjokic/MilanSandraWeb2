@@ -16,7 +16,7 @@ import { AgmCoreModule} from '@agm/core';
 export class MrezeLinijaComponent implements OnInit {
 
   markerInfo: MarkerInfo;
-  selLine: Polyline;
+  selectedLine: Polyline;
   iconPath: any = { url:"assets/busicon.png", scaledSize: {width: 35, height: 35}};
   lines: Line[] = null;
   stations: Station[] = new Array<Station>();
@@ -28,7 +28,7 @@ export class MrezeLinijaComponent implements OnInit {
     this.markerInfo = new MarkerInfo(new GeoLocation(45.232268, 19.842954),
     "assets/images/ftn.png",
     "Jugodrvo", "", "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
-    this.selLine = new Polyline([], 'red', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
+    this.selectedLine = new Polyline([], 'red', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
     this.getLines();
   }
 
@@ -41,24 +41,20 @@ export class MrezeLinijaComponent implements OnInit {
 
   onSelectLine(event: any){
     this.stations = new Array<Station>();
-    this.selLine = new Polyline([], 'red', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
+    this.selectedLine = new Polyline([], 'red', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
     this.lineService.getLineStations(event.target.value).subscribe(
       response =>{
         this.stationsIds = response;
-        console.log(this.stationsIds);
         this.stationsIds.forEach(stationId => {
           this.stationService.getStation(stationId).subscribe(
             station =>{
               this.stations.push(station);
-              this.selLine.addLocation(new GeoLocation(station.XCoordinate, station.YCoordinate));
-              console.log(this.selLine.path);
+              this.selectedLine.addLocation(new GeoLocation(station.XCoordinate, station.YCoordinate)); 
             }
           );
         });
       }
     );
-
-    console.log(this.stations);
   }
 
 }

@@ -289,6 +289,10 @@
     <Compile Include="Migrations\201908291547546_Sixth.Designer.cs">
       <DependentUpon>201908291547546_Sixth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908311724405_Seventh.cs" />
+    <Compile Include="Migrations\201908311724405_Seventh.Designer.cs">
+      <DependentUpon>201908311724405_Seventh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -298,6 +302,7 @@
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Line.cs" />
+    <Compile Include="Models\PayPal.cs" />
     <Compile Include="Models\Pricelist.cs" />
     <Compile Include="Models\PricelistItem.cs" />
     <Compile Include="Models\Station.cs" />
@@ -441,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908291547546_Sixth.resx">
       <DependentUpon>201908291547546_Sixth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908311724405_Seventh.resx">
+      <DependentUpon>201908311724405_Seventh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

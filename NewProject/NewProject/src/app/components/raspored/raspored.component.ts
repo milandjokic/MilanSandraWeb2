@@ -1,18 +1,3 @@
-/*import { Component, OnInit } from '@angular/core';
-
-@Component({
-  selector: 'app-raspored',
-  templateUrl: './raspored.component.html',
-  styleUrls: ['./raspored.component.css']
-})
-export class RasporedComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}*/
 import { Component, OnInit } from '@angular/core';
 import { Line } from 'src/app/models/linija';
 import {Departure} from 'src/app/models/polazak'
@@ -52,22 +37,15 @@ export class RasporedComponent implements OnInit {
 
   getLines(event : any)
   {    
-    //console.log("Lines: " + this.Lines[0].LineName);
     this.selectedDayType = this.timetableForm.controls.dayType.value;
     this.selectedLineType = this.timetableForm.controls.lineType.value;
     this.selectedLineName = this.timetableForm.controls.lineName.value;
-    console.log(this.selectedLineType);
     this.timetableForm.controls.lineName.setValue('');
     this.rasporedService.getLines(this.selectedLineType).subscribe(c=>this.Lines = c);
-    //this.selectedLineName = this.Lines[0].LineName;
-    //console.log("Lines: " + this.Lines[0].LineName);
-    //console.log("LineName: " + this.selectedLineName);
-    console.log("DayType: " + this.selectedDayType + "\nLineType: " + this.selectedLineType + "\nLineName: " + this.selectedLineName + "\nLines: " + this.Lines.length);
   }
 
   getTimetable()
   {
-    console.log("DayType: " + this.selectedDayType + "\nLineType: " + this.selectedLineType + "\nLineName: " + this.timetableForm.controls.lineName.value + "\nLines: " + this.Lines.length);
     this.selectedDayType = this.timetableForm.controls.dayType.value;
     this.selectedLineType = this.timetableForm.controls.lineType.value;
     this.selectedLineName = this.timetableForm.controls.lineName.value;

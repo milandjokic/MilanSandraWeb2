@@ -24,6 +24,7 @@
     <div *ngIf="!loggedIn">
       <input #emailInput name="email" type="email" placeholder="Email" (input)="email=emailInput.value" required>
     </div>
+    <br>
     <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
         <br><ngx-paypal [config]="payPalConfig"></ngx-paypal>
   </div>

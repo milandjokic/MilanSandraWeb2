@@ -39,7 +39,6 @@ export class StanicaComponent implements OnInit {
 
   onSelect(event : any){
     this.selectValue = event.target.value;
-    console.log(this.selectValue);
     this.stationService.getStation(this.selectValue).subscribe(s => {
       this.selectedStation = s;
       this.editOrRemoveStationForm.controls.name.setValue(s.Name);

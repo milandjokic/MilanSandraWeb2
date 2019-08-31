@@ -1,10 +1,21 @@
 <div>
+    <div class="form-group">
+      <div class="col-sm-9 col-md-7 col-lg-3 mx-auto">
+        <br>
+        <label>Linije</label>
+        <select class="form-control" name="selectedLine" (change)="onSelectLine($event)">
+            <option *ngFor="let l of lines" [value] = "l.Id">{{l.LineName}}</option>
+        </select>
+      </div>
+    </div>
+  <!--<span>Linije</span>
   <select name="selectedLine" (change)="onSelectLine($event)">
     <option *ngFor="let l of lines" [value] = "l.Id">{{l.LineName}}</option>
-  </select>
+  </select>-->
 
   <br><br>
 
+  <div>
   <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="14" style="height: 500px">
     <div>
       <agm-marker *ngFor="let station of stations" [latitude]="station.XCoordinate" [longitude]="station.YCoordinate" [title]="station.name" [label]="" [iconUrl]="iconPath">
@@ -22,9 +33,10 @@
 
     <div>
       <agm-polyline [strokeColor]="red">
-        <agm-polyline-point *ngFor="let point of selLine.path" [latitude]="point.latitude" [longitude]="point.longitude">
+        <agm-polyline-point *ngFor="let point of  selectedLine.path" [latitude]="point.latitude" [longitude]="point.longitude">
         </agm-polyline-point>
       </agm-polyline>
     </div>
-  </agm-map>
+   </agm-map>
+  </div>
 </div>

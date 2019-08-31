@@ -13,59 +13,78 @@ import { RedvoznjeAdminComponent } from './components/redvoznje-admin/redvoznje-
 import { ValidacijaKorisnikaComponent } from './components/validacija-korisnika/validacija-korisnika.component';
 import { ValidacijaKarataComponent } from './components/validacija-karata/validacija-karata.component';
 import { MrezeLinijaComponent } from './components/mreze-linija/mreze-linija.component';
+import { CanActivate } from '@angular/router/src/utils/preactivation';
+import { AdminGuard  } from './components/guards/admin-guard.guard';
+import { ControllerGuard } from './components/guards/controller.guard';
+import { UserGuard } from './components/guards/user.guard';
+import { NotRegisteredGuard } from './components/guards/not-registered.guard';
+import { ProfilGuard } from './components/guards/profil.guard';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate : [NotRegisteredGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate : [NotRegisteredGuard]
   },
   {
     path: 'cenovnik',
-    component: CenovnikComponent
+    component: CenovnikComponent,
+    canActivate: [UserGuard]
   },
   {
     path: 'karte',
-    component: KarteComponent
+    component: KarteComponent,
+    canActivate: [UserGuard]
   },
   {
     path: 'profil',
-    component: ProfilComponent
+    component: ProfilComponent,
+    canActivate : [ProfilGuard]
   },
   {
     path: 'stanica',
-    component: StanicaComponent
+    component: StanicaComponent,
+    canActivate : [AdminGuard]
   },
   {
     path: 'raspored',
-    component: RasporedComponent
+    component: RasporedComponent,
+    canActivate: [UserGuard]
   },
   {
     path: 'linije',
-    component: LinijeComponent
+    component: LinijeComponent,
+    canActivate : [AdminGuard]
   },
   {
     path: 'cenovnik-admin',
-    component: CenovnikAdminComponent
+    component: CenovnikAdminComponent,
+    canActivate : [AdminGuard]
   },
   {
     path: 'redvoznje-admin',
-    component: RedvoznjeAdminComponent
+    component: RedvoznjeAdminComponent,
+    canActivate : [AdminGuard]
   },
   {
     path : 'validacija-korisnika',
-    component: ValidacijaKorisnikaComponent
+    component: ValidacijaKorisnikaComponent,
+    canActivate: [ControllerGuard]
   },
   {
     path : 'validacija-karata' ,
-    component: ValidacijaKarataComponent
+    component: ValidacijaKarataComponent,
+    canActivate: [ControllerGuard]
   },
   {
     path: 'mreza-linija',
-    component: MrezeLinijaComponent
+    component: MrezeLinijaComponent,
+    canActivate: [UserGuard]
   }
 ];
 

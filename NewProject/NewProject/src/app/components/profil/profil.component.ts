@@ -45,7 +45,6 @@ export class ProfilComponent implements OnInit {
   onSelect(event : any)
   {
     this.selectValue = event.target.value;
-    //console.log(this.selectValue);
     if(event.target.value != '0')
     {
      this.showFile = true; 
@@ -67,10 +66,8 @@ export class ProfilComponent implements OnInit {
   }
 
   initialize(){
-    console.log(`Email: ${this.userData.Email}`);
 
     this.userProfileActivated = this.userData.Activated;
-    //console.log(this.userProfileActivated);
     if(this.userData.Name)
     {
       this.profileForm.controls.name.setValue(this.userData.Name);
@@ -93,7 +90,6 @@ export class ProfilComponent implements OnInit {
       this.profileForm.controls.email.setValue(this.userData.Email);
     }
     
-      //console.log(this.userData.Activated);
       this.profileForm.controls.activated.setValue(this.userData.Activated);
     
       if(this.selectValue != '0')
@@ -133,7 +129,6 @@ export class ProfilComponent implements OnInit {
         this.profileForm.controls.userType.setValue(this.selectValue);
       }
     }*/
-    console.log(this.userData.Image);
 
     if(this.role == "AppUser" && this.userData.Image != null)
     {

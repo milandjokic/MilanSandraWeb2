@@ -35,7 +35,6 @@ export class ValidacijaKorisnikaComponent implements OnInit {
   {
     this.userService.getNotActiveUsers().subscribe(
       data=>{
-        console.log(data);
         this.users = data;
         if(this.users.length > 0)
         {
@@ -54,7 +53,6 @@ export class ValidacijaKorisnikaComponent implements OnInit {
     this.userService.downloadImage(this.selectedUserEmail).subscribe(
       response => {
         this.image = 'data:image/jpeg;base64,' + response;
-        console.log(this.image);
       });
   }
 
@@ -77,13 +75,11 @@ export class ValidacijaKorisnikaComponent implements OnInit {
     this.userService.downloadImage(this.selectedUserEmail).subscribe(
       response => {
         this.image = 'data:image/jpeg;base64,' + response;
-        console.log(this.image);
       });
   }
 
   validate()
   {
-    console.log('Odobreno');
     this.controllerService.validateUser(this.profileForm.controls.email.value, true).subscribe(
       data => 
       {
@@ -96,7 +92,6 @@ export class ValidacijaKorisnikaComponent implements OnInit {
 
   dismiss()
   {
-    console.log('Odbijeno');
     this.controllerService.validateUser(this.profileForm.controls.email.value, false).subscribe(
       data => 
       {

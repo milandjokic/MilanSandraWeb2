@@ -119,30 +119,15 @@ namespace WebApp.Controllers
             UnitOfWork.TicketRepository.Add(ticket);
             UnitOfWork.TicketRepository.SaveChanges();
 
+            UnitOfWork.TicketRepository.AddPayPal(id, payer_id, payer_email, ticket.Id);
+            UnitOfWork.TicketRepository.SaveChanges();
+
             if (!isLoggedIn)
             {
                 EmailHelper.SendEmail(email, "Buying Ticket", "You have successfully bought a ticket via PayPal with ID: " + ticket.Id);
             }
 
-            //var req = HttpContext.Current.Request;
-            /*var price = _unitOfWork.Prices.GetAll().Where(u => u.ticketType == TicketType.TimeTicket).Select(u => u.price).FirstOrDefault();
-            Ticket ticket = new Ticket() { Checked = false, Price = price, RemainingTime = TimeSpan.FromMinutes(60), Type = Enums.TicketType.TimeTicket };
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            _unitOfWork.Tickets.Add(ticket);
-            _unitOfWork.Complete();
-            EmailHelper.SendEmail(req.Form["email"], "TIME BUS TICKET", "You just bought your time ticket." + System.Environment.NewLine + "Ticket ID: " + ticket.Id + System.Environment.NewLine + "Type: " + ticket.Type + System.Environment.NewLine + "Price" + ticket.Price + System.Environment.NewLine + "NOTICE: Time ticket is valid 60 minutes after checked in.");
-            var id = req.Form["id"];
-            var status = req.Form["status"];
-            var payer_email = req.Form["payer_email"];
-            var payer_id = req.Form["payer_id"];
-            var create_time = req.Form["create_time"];
-            var update_time = req.Form["update_time"];
-            PayPalInfo payPalInfo = new PayPalInfo { CreateTime = create_time, UpdateTime = update_time, TransactionId = id, PayerEmail = payer_email, PayerId = payer_id, Status = status, TicketId = ticket.Id };
-            _unitOfWork.PayPalInfos.Add(payPalInfo);
-            _unitOfWork.Complete();*/
+          
 
             return Ok(200);
         }
