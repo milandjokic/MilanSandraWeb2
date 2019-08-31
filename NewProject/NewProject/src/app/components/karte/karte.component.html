@@ -1,10 +1,10 @@
 <br>
 <br>
 <div class="form">
-    <div *ngIf="userProfileActivated != '1'">
+    <div *ngIf="userProfileActivated != '1' && temp">
         <button type="button" class="btn btn-lg btn-block" disabled>Profil nije verifikovan!</button>
       </div>
-      <div *ngIf="userProfileActivated == '1'">
+      <div *ngIf="userProfileActivated == '1' || !temp">
   <form class="login-form" [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
     
     <label>Izaberite kartu</label>
@@ -24,5 +24,7 @@
     <div *ngIf="!loggedIn">
       <input #emailInput name="email" type="email" placeholder="Email" (input)="email=emailInput.value" required>
     </div>
+    <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
+        <br><ngx-paypal [config]="payPalConfig"></ngx-paypal>
   </div>
 </div>

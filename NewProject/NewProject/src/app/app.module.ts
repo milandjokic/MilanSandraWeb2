@@ -24,6 +24,7 @@ import { CenovnikAdminComponent } from './components/cenovnik-admin/cenovnik-adm
 import { RedvoznjeAdminComponent } from './components/redvoznje-admin/redvoznje-admin/redvoznje-admin.component';
 import { ValidacijaKorisnikaComponent } from './components/validacija-korisnika/validacija-korisnika.component';
 import { ValidacijaKarataComponent } from './components/validacija-karata/validacija-karata.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 
 @NgModule({
@@ -51,9 +52,12 @@ import { ValidacijaKarataComponent } from './components/validacija-karata/valida
     HttpModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxPayPalModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
     ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
+  
+
 })
 export class AppModule { }
