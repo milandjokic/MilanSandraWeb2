@@ -42,18 +42,19 @@
                       </div>
                 </agm-map>
             </div>
+            <br>
             <div *ngIf="editOrRemoveStationForm.valid">
-                <button class="btn btn-lg btn-primary text-uppercase active" (click)="editStation()">Uredi stanicu</button>
+                <button class="btn btn-lg btn-dark text-uppercase active" (click)="editStation()">Uredi stanicu</button>
               </div>
               <div *ngIf="!editOrRemoveStationForm.valid">
-                <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!editOrRemoveStationForm.valid">Uredi stanicu</button>
+                <button class="btn btn-lg btn-dark text-uppercase disabled" [disabled]="!editOrRemoveStationForm.valid">Uredi stanicu</button>
               </div>
-            <br><br>
+            <br>
             <div *ngIf="editOrRemoveStationForm.valid">
-                <button class="btn btn-lg btn-primary text-uppercase active" (click)="deleteStation()">Obrisi stanicu</button>
+                <button class="btn btn-lg btn-dark text-uppercase active" (click)="deleteStation()">Obrisi stanicu</button>
               </div>
               <div *ngIf="!editOrRemoveStationForm.valid">
-                  <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!editOrRemoveStationForm.valid">Obrisi stanicu</button>
+                  <button class="btn btn-lg btn-dark text-uppercase disabled" [disabled]="!editOrRemoveStationForm.valid">Obrisi stanicu</button>
               </div>
           </form>
           <div>

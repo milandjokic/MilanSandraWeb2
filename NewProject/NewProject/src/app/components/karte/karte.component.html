@@ -15,17 +15,28 @@
       <option *ngIf="loggedIn">MonthTicket</option>
       <option *ngIf="loggedIn">YearTicket</option>
     </select>
-    <button type="submit" [disabled]="!ticketForm.valid">Kupi</button>
   </form>
   <br>
   <label>Cena karte: </label>
     <span>{{price}}</span>
     <span>rsd</span>
     <div *ngIf="!loggedIn">
-      <input #emailInput name="email" type="email" placeholder="Email" (input)="email=emailInput.value" required>
-    </div>
+      <form class="login-form" [formGroup]="emailForm">
+      <input name="email" formControlName="email" type="email" placeholder="Email" required>
+  </form>
+</div>
     <br>
-    <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
+    <div *ngIf="emailForm.valid && !loggedIn">
+        <button class="btn btn-lg btn-dark btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
+      </div>
+      <div *ngIf="!emailForm.valid && !loggedIn">
+          <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!emailForm.valid">Buy</button>
+        </div>
+        <div *ngIf="loggedIn">
+            <button class="btn btn-lg btn-dark btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
+          </div>
+      
+    
         <br><ngx-paypal [config]="payPalConfig"></ngx-paypal>
   </div>
 </div>

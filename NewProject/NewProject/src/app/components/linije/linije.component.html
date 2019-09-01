@@ -20,10 +20,10 @@
             <br>
             <br>
             <div *ngIf="addLineForm.valid">
-                <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="addLine()">Dodaj liniju</button>
+                <button class="btn btn-lg btn-dark btn-block text-uppercase active" (click)="addLine()">Dodaj liniju</button>
               </div>
               <div *ngIf="!addLineForm.valid">
-                <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!addLineForm.valid">Dodaj liniju</button>
+                <button class="btn btn-lg btn-dark btn-block text-uppercase disabled" [disabled]="!addLineForm.valid">Dodaj liniju</button>
               </div><br>
           </form>
         </div>
@@ -46,17 +46,17 @@
                 </div>
                 <br>
               <div *ngIf="editOrRemoveLineForm.valid">
-                  <button class="btn btn-lg btn-primary text-uppercase active" (click)="editLine()">Promeni liniju</button>
+                  <button class="btn btn-lg btn-dark text-uppercase active" (click)="editLine()">Promeni liniju</button>
                 </div>
                 <div *ngIf="!editOrRemoveLineForm.valid">
-                  <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!editOrRemoveLineForm.valid">Promeni liniju</button>
+                  <button class="btn btn-lg btn-dark text-uppercase disabled" [disabled]="!editOrRemoveLineForm.valid">Promeni liniju</button>
                 </div>
                 <br>
                 <div *ngIf="editOrRemoveLineForm.valid">
-                  <button class="btn btn-lg btn-primary text-uppercase active" (click)="deleteLine()">Obrisi liniju</button>
+                  <button class="btn btn-lg btn-dark text-uppercase active" (click)="deleteLine()">Obrisi liniju</button>
                 </div>
                 <div *ngIf="!editOrRemoveLineForm.valid">
-                    <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!editOrRemoveLineForm.valid">Obrisi liniju</button>
+                    <button class="btn btn-lg btn-dark text-uppercase disabled" [disabled]="!editOrRemoveLineForm.valid">Obrisi liniju</button>
                 </div>
             </form>
           </div>

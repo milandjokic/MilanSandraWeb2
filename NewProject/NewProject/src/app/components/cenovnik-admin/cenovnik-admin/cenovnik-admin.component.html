@@ -7,7 +7,7 @@
         <label>Od</label>
         <input formControlName="from" type="text" class="form-control" disabled>
     </div>
-    
+    <br>
     <div>
         <label>Do</label>
         <input formControlName="to" name="to" type="datetime-local" class="form-control">
@@ -60,10 +60,12 @@
             <input type="hidden" name="from" class="form-control" required formControlName="from">
             <button type="button" class="form-control" disabled>{{pricelistForm.controls.from.value}}</button>
         </div>
+        <br>
         <div class="form-label-group">
             <input type="hidden" name="to" class="form-control" required formControlName="to">
             <button type="button" class="form-control" disabled>{{pricelistForm.controls.to.value}}</button>
         </div>
+        <br>
       <span> Vremenska karta </span>
       <input formControlName="timeTicket" type="number"/><br><br>
       <span> Dnevna karta </span>
@@ -75,7 +77,7 @@
       <br><br>
       
       <div *ngIf="pricelistForm.valid">
-          <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="editPricelist()">Edit Pricelist</button>
+          <button class="btn btn-lg btn-primary btn-block text-uppercase" (click)="editPricelist()">Edit Pricelist</button>
         </div>
         <div *ngIf="!pricelistForm.valid">
           <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!pricelistForm.valid">Edit Pricelist</button>

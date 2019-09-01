@@ -20,12 +20,11 @@
       <option *ngFor="let line of Lines"> {{line.LineName}}</option>
     </select><br>
     <div *ngIf="timetableForm.controls.lineName.value">
-        <button type="submit">Prikazi</button>
+        <button class="btn btn-lg btn-dark btn-block text-uppercase active" type="submit">Prikazi</button>
       </div>
       <br>
-      <br>
       <div *ngIf="!timetableForm.controls.lineName.value">
-        <button disabled type="submit">Prikazi</button>
+        <button class="btn btn-lg btn-dark btn-block text-uppercase disabled"  type="submit">Prikazi</button>
       </div>
     <!--<button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Schedule</button>-->
     <br>

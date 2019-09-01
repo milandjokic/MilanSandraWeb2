@@ -12,10 +12,10 @@
           </div>
           <br>
           <div *ngIf="validateTicketForm.valid">
-              <button class="btn btn-lg btn-primary text-uppercase active" (click)="check()">Proveri validnost</button>
+              <button class="btn btn-lg btn-dark text-uppercase active" (click)="check()">Proveri validnost</button>
             </div>
             <div *ngIf="!validateTicketForm.valid">
-              <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!validateTicketForm.valid">Proveri validnost</button>
+              <button class="btn btn-lg btn-dark text-uppercase disabled" [disabled]="!validateTicketForm.valid">Proveri validnost</button>
             </div>
         </form>
     </div>

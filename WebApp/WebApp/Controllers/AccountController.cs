@@ -97,7 +97,7 @@ namespace WebApp.Controllers
         public IQueryable<ApplicationUser> GetNotActiveUsers()
         {
             List<ApplicationUser> ret = new List<ApplicationUser>();
-            foreach (var user in UserManager.Users.Where(p => p.Activated == RequestType.InProcess))
+            foreach (var user in UserManager.Users.Where(p => p.Activated == RequestType.InProcess && p.Image != null))
             {
                 if (UserManager.IsInRole(user.Id, "AppUser"))
                 {

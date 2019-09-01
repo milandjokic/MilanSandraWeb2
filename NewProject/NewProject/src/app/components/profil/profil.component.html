@@ -41,14 +41,14 @@
       </div>
       <br>
       <div *ngIf="profileForm.valid">
-          <button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Izmena</button>
+          <button class="btn btn-lg btn-dark btn-block text-uppercase active" type="submit">Izmena</button>
         </div>
         <div *ngIf="!profileForm.valid">
-          <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!profileForm.valid" type="submit">Izmena</button>
+          <button class="btn btn-lg btn-dark btn-block text-uppercase disabled" [disabled]="!profileForm.valid" type="submit">Izmena</button>
         </div><br>
       <br><br>
       <div *ngIf="role == 'AppUser'">
-        <button (click)="delete()">Obrisi nalog</button>
+        <button class="btn btn-lg btn-dark btn-block text-uppercase active" (click)="delete()">Obrisi nalog</button>
       </div>
     </form>
     <br><br><br><br>

@@ -3,7 +3,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #2b7cff;
+  background-color: #494d4a;
 }
 
 li {
@@ -19,7 +19,7 @@ li a {
 }
 
 li a:hover {
-  background-color: #76a9fc;
+  background-color: #638064;
 }
 
 .klasa{

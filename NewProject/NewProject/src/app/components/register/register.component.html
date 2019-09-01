@@ -51,7 +51,7 @@
         <div *ngIf="selectedUserType != 'RegularUser'">
           <input type="file" accept="image/*" formControlName="image" (change)="onImageChange($event)"/>
         </div>
-        <button type="submit" [disabled]="!registerForm.valid">Registracija</button>
+        <button  class="btn btn-lg btn-dark text-uppercase active" type="submit" [disabled]="!registerForm.valid">Registracija</button>
       </form>
     </div>
   </div>

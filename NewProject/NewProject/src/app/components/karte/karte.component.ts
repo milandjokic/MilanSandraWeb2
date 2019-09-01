@@ -14,13 +14,17 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
 export class KarteComponent implements OnInit {
 
+  emailForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]]
+  });
+
   loggedIn : undefined;
   price: number;
   userData: any;
   userProfileActivated: any;
   userProfileType: any;
   addTicket: any;
-  email: any;
+  //email: any;
   temp: any;
   isLoggedIn: boolean;
   priceEur : number;
@@ -56,7 +60,7 @@ export class KarteComponent implements OnInit {
   }
 
   onSubmit(){
-    this.karteService.addTicket(this.price, this.choosenTicketType, localStorage.getItem('name'), this.email).subscribe(data => this.addTicket=data);
+    this.karteService.addTicket(this.price, this.choosenTicketType, localStorage.getItem('name'), this.emailForm.controls.email.value).subscribe(data => this.addTicket=data);
   }
 
   getUser(){
@@ -66,7 +70,8 @@ export class KarteComponent implements OnInit {
         this.userData = data;
         this.userProfileActivated = this.userData.Activated;
         this.userProfileType = this.userData.UserType;
-        this.email = this.userData.Email;
+        //this.email = this.userData.Email;
+        this.emailForm.controls.email.setValue(this.userData.Email);
         if(!this.userProfileActivated)
         {
           this.userProfileType = 0;
@@ -81,6 +86,7 @@ export class KarteComponent implements OnInit {
       }
       else
       {
+        this.emailForm.controls.email.setValue(null);
         this.cenovnikService.getTicketPrice(this.choosenTicketType, '0').subscribe( data => 
           {
             this.price = data;
@@ -91,7 +97,7 @@ export class KarteComponent implements OnInit {
   }
 
   buyTicket(){
-    this.karteService.addTicket(this.price, this.choosenTicketType, localStorage.getItem('name'), this.email).subscribe( data => this.addTicket = data);
+    this.karteService.addTicket(this.price, this.choosenTicketType, localStorage.getItem('name'), this.emailForm.controls.email.value).subscribe( data => this.addTicket = data);
     window.alert("You've buyed a ticked");
   }
 
@@ -146,7 +152,7 @@ export class KarteComponent implements OnInit {
             this.userProfileType = 0;
             
           }
-          this.karteService.buyTicket(this.isLoggedIn, this.email, data.id, data.payer.email_address, data.payer.payer_id, this.price, this.choosenTicketType, this.userProfileType).subscribe();
+          this.karteService.buyTicket(this.isLoggedIn, this.emailForm.controls.email.value, data.id, data.payer.email_address, data.payer.payer_id, this.price, this.choosenTicketType, this.userProfileType).subscribe();
           
       },
       onCancel: (data, actions) => {

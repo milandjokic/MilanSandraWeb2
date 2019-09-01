@@ -10,7 +10,6 @@
                  
               </select>
              </div>
-              <br>
         </div>
         <br/>
      </div>
@@ -28,21 +27,22 @@
             <span> Datum rodjenja </span>
             <input formControlName="dateOfBirth" type="date" placeholder="Datum rodjenja"/><br><br>
             <div *ngIf="profileForm.valid">
-                <button class="btn btn-lg btn-primary text-uppercase active" (click)="validate()">Validacija</button>
+                <button class="btn btn-lg btn-dark text-uppercase active" (click)="validate()">Validacija</button>
               </div>
               <div *ngIf="!profileForm.valid">
-                <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!profileForm.valid">Validacija</button>
+                <button class="btn btn-lg btn-dark text-uppercase disabled" [disabled]="!profileForm.valid">Validacija</button>
               </div>
               <br>
               <div *ngIf="profileForm.valid">
-                  <button class="btn btn-lg btn-primary text-uppercase active" (click)="dismiss()">Odbij</button>
+                  <button class="btn btn-lg btn-dark text-uppercase active" (click)="dismiss()">Odbij</button>
                 </div>
                 <div *ngIf="!profileForm.valid">
-                  <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!profileForm.valid">Odbij</button>
+                  <button class="btn btn-lg btn-dark text-uppercase disabled" [disabled]="!profileForm.valid">Odbij</button>
                 </div>
             
-              <img style="height: 300px; width: 300px" *ngIf="image" [src]="image">
-            
+                <div *ngIf="image != null">
+              <img style="height: 300px; width: 300px" [src]="image">
+            </div>
             <br>
           </form>
         </div>
