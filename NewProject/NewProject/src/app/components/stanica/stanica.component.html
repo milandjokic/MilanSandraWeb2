@@ -1,8 +1,16 @@
 <div class="row">
 <div class="login-page column">
-  <div>
       <div class="form">
         <form class="login-form" [formGroup]="addStationForm">
+            <div id="map-container-google-8" class="z-depth-1-half map-container-5" style="height: 300px">
+                <agm-map (mapClick)="MapClicked($event)" [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="14" style="height: 300px;">
+                    <div *ngIf="clicked">
+                        <agm-marker [latitude]="addStationForm.controls.xCoordinate.value" [longitude]="addStationForm.controls.yCoordinate.value">
+                          
+                        </agm-marker>
+                      </div>
+                </agm-map>
+            </div>
           <input formControlName="name" type="text" placeholder="Ime"/>
           <input formControlName="address" type="text" placeholder="Adresa"/>
           <input formControlName="xCoordinate" type="text" placeholder="X koordinata"/>
@@ -15,7 +23,6 @@
             </div><br>
         </form>
       </div>
-    </div>
     <div>
         <div class="form">
           <form class="login-form" [formGroup]="editOrRemoveStationForm">
@@ -26,6 +33,15 @@
             <input formControlName="address" type="text" placeholder="Adresa"/>
             <input formControlName="xCoordinate" type="text" placeholder="X koordinata"/>
             <input formControlName="yCoordinate" type="text" placeholder="Y koordinata"/>
+            <div id="map-container-google-8" class="z-depth-1-half map-container-5" style="height: 300px">
+                <agm-map (mapClick)="MapClickedEdit($event)" [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="14" style="height: 300px;">
+                    <div *ngIf="clicked">
+                        <agm-marker [latitude]="editOrRemoveStationForm.controls.xCoordinate.value" [longitude]="editOrRemoveStationForm.controls.yCoordinate.value">
+                          
+                        </agm-marker>
+                      </div>
+                </agm-map>
+            </div>
             <div *ngIf="editOrRemoveStationForm.valid">
                 <button class="btn btn-lg btn-primary text-uppercase active" (click)="editStation()">Uredi stanicu</button>
               </div>
@@ -52,8 +68,9 @@
     <br/>
     <br/>
 </div>
-<div style="width:auto; padding: 45px" class="column">
+<!--<div>
     <app-map></app-map>
 </div>
+-->
 </div>
   

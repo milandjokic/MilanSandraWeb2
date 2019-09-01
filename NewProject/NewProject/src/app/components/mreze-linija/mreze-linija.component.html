@@ -15,7 +15,7 @@
 
   <br><br>
 
-  <div>
+  <div id="map-container-google-8" class="z-depth-1-half map-container-5" style="height: 300px">
   <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="14" style="height: 500px">
     <div>
       <agm-marker *ngFor="let station of stations" [latitude]="station.XCoordinate" [longitude]="station.YCoordinate" [title]="station.name" [label]="" [iconUrl]="iconPath">
