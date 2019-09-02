@@ -29,6 +29,7 @@ selectedDeparture : any = "";
 selectedLineId : any;
 selectedDepartureId : any;
 editDeleteDeparture: any;
+scheduleVersion: any;
 
   constructor(private fb: FormBuilder, private scheduleService:RedvoznjeAdminService, private timetableService: RasporedService, private linesService : LinijeService) { }
 
@@ -45,6 +46,7 @@ editDeleteDeparture: any;
           this.selectedLineName = this.lines[0].LineName;
           this.selectedLineType = this.lines[0].LineType;
           this.selectedDayType = "0";
+          //console.log(data);
           this.getDepartures();
         }
       }
@@ -56,7 +58,7 @@ editDeleteDeparture: any;
     this.timetableService.getSchedule(this.selectedDayType , this.selectedLineType , this.selectedLineName).subscribe(
       data =>{
         this.Departures = data;
-
+        console.log(data);
       });
   }
 
@@ -95,16 +97,29 @@ editDeleteDeparture: any;
       if(this.Departures[this.i].Id == event.target.value)
       {
         this.selectedDeparture = this.Departures[this.i].Departures;
+        this.scheduleVersion = this.Departures[this.i].Version;
         this.scheduleForm.controls.editDeleteDeparture.setValue(this.Departures[this.i].Departures);
       }
     }
   }
 
   onClickEdit(){
-    this.scheduleService.editDeparture(this.selectedDepartureId, this.scheduleForm.controls.editDeleteDeparture.value).subscribe(
+    this.scheduleService.editDeparture(this.selectedDepartureId, this.scheduleVersion, this.scheduleForm.controls.editDeleteDeparture.value).subscribe(
       data =>{
-        this.getDepartures();
-        this.scheduleForm.reset();
+        if(data == 200)
+        {
+
+          this.getDepartures();
+          this.scheduleForm.reset();
+        }
+        else if(data == 203)
+        {
+          window.alert("Drugi admin je vec obrisao vrednosti polja, molim vas refresujte stranicu");
+        }
+        else
+        {
+          window.alert("Drugi admin je vec promenio vrednosti polja, molim vas refresujte stranicu");
+        }
       }
     );
   }
@@ -112,8 +127,16 @@ editDeleteDeparture: any;
   onClickDelete(){
     this.scheduleService.deleteDeparture(this.selectedDepartureId).subscribe(
       data =>{
-        this.getDepartures();
-        this.scheduleForm.reset();
+
+        if(data == 200)
+        {
+          this.getDepartures();
+          this.scheduleForm.reset();
+        }
+        else
+        {
+          window.alert("Drugi admin je vec obrisao vrednosti polja, molim vas refresujte stranicu");
+        }
       }
     );
   }

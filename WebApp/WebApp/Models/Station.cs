@@ -16,5 +16,8 @@ namespace WebApp.Models
         public double XCoordinate { get; set; }
 
         public double YCoordinate { get; set; }
+
+        public long Version { get; set; }
+
     }
 }

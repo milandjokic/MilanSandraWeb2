@@ -5,5 +5,6 @@ export class Station{
     XCoordinate: number;
     YCoordinate: number;
     Exist : boolean = false;
+    Version : number;
 }
 

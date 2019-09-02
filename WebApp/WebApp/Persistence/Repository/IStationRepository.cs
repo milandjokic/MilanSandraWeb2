@@ -9,7 +9,7 @@ namespace WebApp.Persistence.Repository
 {
     public interface IStationRepository : IRepository<Station, int>
     {
-        void EditStation(Station station, int id);
+        bool EditStation(Station station, long stationVersion, int id);
         List<string> FindLines(int idStation);
         void DeleteStationsLines(int id);
     }

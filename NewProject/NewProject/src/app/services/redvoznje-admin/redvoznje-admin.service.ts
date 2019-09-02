@@ -13,11 +13,11 @@ export class RedvoznjeAdminService {
     return this.http.post<any[]>(`http://localhost:52295/api/Timetables/AddDeparture?idLine=${idLine}&dayType=${dayType}&departures=${departures}`, [idLine, dayType, departures]);
   }
 
-  deleteDeparture(departureId: any): Observable<any[]>{
-    return this.http.delete<any[]>(`http://localhost:52295/api/Timetables/Delete?departureId=${departureId}`);
+  deleteDeparture(departureId: any): Observable<any>{
+    return this.http.delete<any>(`http://localhost:52295/api/Timetables/Delete?departureId=${departureId}`);
   }
 
-  editDeparture(departureId: any, selectedDeparture: any): Observable<any>{
-    return this.http.post<any>(`http://localhost:52295/api/Timetables/EditDeparture?departureId=${departureId}&selectedDeparture=${selectedDeparture}`, [departureId, selectedDeparture]);
+  editDeparture(departureId: any, scheduleVersion : number ,selectedDeparture: any): Observable<any>{
+    return this.http.post<any>(`http://localhost:52295/api/Timetables/EditDeparture?departureId=${departureId}&scheduleVersion=${scheduleVersion}&selectedDeparture=${selectedDeparture}`, [departureId, scheduleVersion, selectedDeparture]);
   }
 }

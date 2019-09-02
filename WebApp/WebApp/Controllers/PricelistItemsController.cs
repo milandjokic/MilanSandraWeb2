@@ -58,17 +58,22 @@ namespace WebApp.Controllers
 
         [Route("EditPricelist")]
         [ResponseType(typeof(Pricelist))]
-        public IHttpActionResult EditPricelist(int id, double timeTicket, double dayTicket, double monthTicket, double yearTicket)
+        public IHttpActionResult EditPricelist(int id, long pricelistVersion, double timeTicket, double dayTicket, double monthTicket, double yearTicket)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            UnitOfWork.PricelistItemRepository.editPricelist(id, timeTicket, dayTicket, monthTicket, yearTicket);
-            UnitOfWork.PricelistItemRepository.SaveChanges();
-
-            return Ok(id);
+            if (UnitOfWork.PricelistItemRepository.editPricelist(id, pricelistVersion, timeTicket, dayTicket, monthTicket, yearTicket))
+            {
+                UnitOfWork.PricelistItemRepository.SaveChanges();
+                return Ok(200);
+            }
+            else
+            {
+               return Ok(204);
+            }
         }
 
         // PUT: api/PricelistItems/5

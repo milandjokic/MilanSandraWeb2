@@ -32,6 +32,7 @@ export class LinijeComponent implements OnInit {
    i: number;
    lineStationsIds: any[] = [];
    j : number;
+   lineVersion : any;
 
 
   constructor(private fb: FormBuilder, private linesService: LinijeService, private stationService: StanicaService) { }
@@ -45,6 +46,7 @@ export class LinijeComponent implements OnInit {
     this.linesService.getLines().subscribe(
       data=>{
         this.lines = data;
+        
       }
     );
   }
@@ -56,6 +58,9 @@ export class LinijeComponent implements OnInit {
       this.selectedLine = l;
       this.editOrRemoveLineForm.controls.lineName.setValue(l.LineName);
       this.editOrRemoveLineForm.controls.lineType.setValue(l.LineType);
+      
+      this.lineVersion = l.Version;
+      console.log(this.lineVersion);
     });
     //this.getAllStations();
     this.linesService.getLineStations(this.selectValue).subscribe(
@@ -68,6 +73,7 @@ export class LinijeComponent implements OnInit {
             for(this.j = 0; this.j < data.length; this.j++)
             {
               if(this.allStations[this.i].Id == data[this.j]){
+
                     this.allStations[this.i].Exist = true;
                   break;
               }
@@ -100,14 +106,22 @@ export class LinijeComponent implements OnInit {
   {
     this.linesService.deleteLine(this.selectValue).subscribe(
       d=>{
-        this.getLines();
-        window.alert("Linija je uspesno obrisana " + this.selectValue);
-        this.selectValue = "";
-        this.editOrRemoveLineForm.reset();
-        this.getAllStations();
-        for(this.i = 0; this.i < this.allStations.length; this.i++)
+        if(d == 200)
         {
-          this.allStations[this.i].Exist = false;
+
+          this.getLines();
+          window.alert("Linija je uspesno obrisana " + this.selectValue);
+          this.selectValue = "";
+          this.editOrRemoveLineForm.reset();
+          this.getAllStations();
+          for(this.i = 0; this.i < this.allStations.length; this.i++)
+          {
+            this.allStations[this.i].Exist = false;
+          }
+        }
+        else
+        {
+          window.alert("Drugi admin je vec obrisao ovu liniju, molim vas refresujte stranicu");
         }
 
       }
@@ -116,15 +130,31 @@ export class LinijeComponent implements OnInit {
 
   editLine()
   {
-    this.linesService.editLine(this.editOrRemoveLineForm.controls.lineName.value, this.editOrRemoveLineForm.controls.lineType.value, this.selectValue, this.lineStationsIds).subscribe(
+    this.linesService.editLine(this.editOrRemoveLineForm.controls.lineName.value, this.lineVersion, this.editOrRemoveLineForm.controls.lineType.value, this.selectValue, this.lineStationsIds).subscribe(
       data =>{
-        this.getLines();
-        window.alert("USPESNO MENJANJE LINIJE SA ID: " + this.selectValue);
-        this.editOrRemoveLineForm.reset();
-        this.getAllStations();
-        for(this.i = 0; this.i < this.allStations.length; this.i++)
+        if(data == 200)
         {
-          this.allStations[this.i].Exist = false;
+
+          this.getLines();
+          window.alert("USPESNO MENJANJE LINIJE SA ID: " + this.selectValue);
+          this.editOrRemoveLineForm.reset();
+          this.getAllStations();
+          for(this.i = 0; this.i < this.allStations.length; this.i++)
+          {
+            this.allStations[this.i].Exist = false;
+          }
+        }
+        else if(data == 204)
+        {
+          window.alert("Drugi admin je vec promenio vrednosti polja, molim vas refresujte stranicu");
+        }
+        else if(data == 203)
+        {
+          window.alert("Drugi admin je vec obrisao jednu od stanica ove linije, molim vas refresujte stranicu");
+        }
+        else if(data == 202)
+        {
+          window.alert("Drugi admin je vec obrisao liniju, molim vas refresujte stranicu");
         }
       }
     );

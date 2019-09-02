@@ -460,3 +460,6 @@ E:\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.csproj.CopyComplete
 E:\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.dll
 E:\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.pdb
 C:\Users\Admin\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.Migrations.Seventh.resources
+C:\Users\Admin\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.Migrations.Eight.resources
+C:\Users\Admin\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.Migrations.Nineth.resources
+C:\Users\Admin\Desktop\MilanSandraWeb2\WebApp\WebApp\obj\Debug\WebApp.Migrations.Tenth.resources

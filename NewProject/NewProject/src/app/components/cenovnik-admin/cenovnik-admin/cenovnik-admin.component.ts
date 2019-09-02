@@ -29,6 +29,7 @@ export class CenovnikAdminComponent implements OnInit {
    pricelist: any;
    prices: any[] = [];
    date : Date = new Date;
+   pricelistVersion : any;
 
   constructor(private fb: FormBuilder, private cenovnikAdminService: CenovnikAdminService) { }
 
@@ -45,6 +46,8 @@ export class CenovnikAdminComponent implements OnInit {
         this.pricelistForm.controls.yearTicket.setValue(this.prices[3]);
         this.pricelistForm.controls.from.setValue(this.pricelist.Start);
         this.pricelistForm.controls.to.setValue(this.pricelist.End);
+        console.log(this.pricelist.Version);
+        this.pricelistVersion = this.pricelist.Version;
       }
     );
 
@@ -52,7 +55,20 @@ export class CenovnikAdminComponent implements OnInit {
   }
 
   editPricelist(){
-    this.cenovnikAdminService.editPricelist(this.pricelist.Id, this.pricelistForm.controls.timeTicket.value, this.pricelistForm.controls.dayTicket.value, this.pricelistForm.controls.monthTicket.value, this.pricelistForm.controls.yearTicket.value).subscribe();
+    this.cenovnikAdminService.editPricelist(this.pricelist.Id, this.pricelistVersion, this.pricelistForm.controls.timeTicket.value, this.pricelistForm.controls.dayTicket.value, this.pricelistForm.controls.monthTicket.value, this.pricelistForm.controls.yearTicket.value).subscribe(
+      data => {
+        console.log('dATA');
+        console.log(data);
+        if(data == 200)
+        {
+
+        }
+        else
+        {
+          window.alert("Drugi admin je vec promenio vrednosti polja, molim vas refresujte stranicu");
+        }
+      }
+    );
   }
 
   addPricelist(){

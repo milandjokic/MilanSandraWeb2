@@ -13,8 +13,8 @@ export class CenovnikAdminService {
     return this.http.get<any[]>(`http://localhost:52295/api/PricelistItems/GetActivePricelists`);
   }
 
-  editPricelist(id: any, timeTicket: any, dayTicket: any, monthTicket: any, yearTicket: any): Observable<any[]>{
-    return this.http.post<any[]>(`http://localhost:52295/api/PricelistItems/EditPricelist?id=${id}&timeTicket=${timeTicket}&dayTicket=${dayTicket}&monthTicket=${monthTicket}&yearTicket=${yearTicket}`, [id, timeTicket, dayTicket, monthTicket, yearTicket]);
+  editPricelist(id: any, pricelistVersion: any, timeTicket: any, dayTicket: any, monthTicket: any, yearTicket: any): Observable<any>{
+    return this.http.post<any>(`http://localhost:52295/api/PricelistItems/EditPricelist?id=${id}&pricelistVersion=${pricelistVersion}&timeTicket=${timeTicket}&dayTicket=${dayTicket}&monthTicket=${monthTicket}&yearTicket=${yearTicket}`, [id, pricelistVersion, timeTicket, dayTicket, monthTicket, yearTicket]);
      
   }
 

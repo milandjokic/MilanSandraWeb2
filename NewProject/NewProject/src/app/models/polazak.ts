@@ -4,4 +4,5 @@ export class Departure{
     IdLine : number;
     IdDay : number;
     IdTimetableActive : number;
+    Version : number;
 }

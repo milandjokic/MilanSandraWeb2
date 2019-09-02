@@ -23,8 +23,8 @@ export class StanicaService {
     return this.http.get<Station>(`http://localhost:52295/api/Stations/${id}`);
   }
 
-  deleteStation(id: any): Observable<any>{
-    return this.http.delete<any>(`http://localhost:52295/api/Stations/Delete?id=${id}`);
+  deleteStation(id: any, stationVersion : number): Observable<any>{
+    return this.http.delete<any>(`http://localhost:52295/api/Stations/Delete?id=${id}&stationVersion=${stationVersion}`);
   }
 
   editStation(station: any, id:any): Observable<any>{

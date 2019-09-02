@@ -294,6 +294,18 @@
     <Compile Include="Migrations\201908311724405_Seventh.Designer.cs">
       <DependentUpon>201908311724405_Seventh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909020256534_Eight.cs" />
+    <Compile Include="Migrations\201909020256534_Eight.Designer.cs">
+      <DependentUpon>201909020256534_Eight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909020334566_Nineth.cs" />
+    <Compile Include="Migrations\201909020334566_Nineth.Designer.cs">
+      <DependentUpon>201909020334566_Nineth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909020441187_Tenth.cs" />
+    <Compile Include="Migrations\201909020441187_Tenth.Designer.cs">
+      <DependentUpon>201909020441187_Tenth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -450,6 +462,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908311724405_Seventh.resx">
       <DependentUpon>201908311724405_Seventh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909020256534_Eight.resx">
+      <DependentUpon>201909020256534_Eight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909020334566_Nineth.resx">
+      <DependentUpon>201909020334566_Nineth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909020441187_Tenth.resx">
+      <DependentUpon>201909020441187_Tenth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

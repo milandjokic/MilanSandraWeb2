@@ -124,13 +124,13 @@ namespace WebApp.Controllers
         // DELETE: api/Stations/5
         [Route("Delete")]
         [ResponseType(typeof(Station))]
-        public IHttpActionResult DeleteStation(int id)
+        public IHttpActionResult DeleteStation(int id, long stationVersion)
         {
             Station station = UnitOfWork.StationRepository.Get(id);
             //Station station = db.Stations.Find(id);
             if (station == null)
             {
-                return NotFound();
+                return Ok(204);
             }
 
             UnitOfWork.StationRepository.Remove(station);
@@ -138,8 +138,9 @@ namespace WebApp.Controllers
             // db.SaveChanges();
             UnitOfWork.StationRepository.SaveChanges();
             UnitOfWork.StationRepository.DeleteStationsLines(id);
+            UnitOfWork.StationRepository.SaveChanges();
 
-            return Ok(station);
+            return Ok(200);
         }
 
         // DELETE: api/Stations/5
@@ -147,28 +148,22 @@ namespace WebApp.Controllers
         [ResponseType(typeof(Station))]
         public IHttpActionResult EditStation(Station station, int id)
         {
-            if (station == null)
+            Station stat = UnitOfWork.StationRepository.Get(id);
+            if (stat == null)
             {
-                return NotFound();
+                return Ok(203);
             }
 
-            
-            //stationTemp.Name = station.Name;
-            //stationTemp.Address = station.Address;
-            //stationTemp.XCoordinate = station.XCoordinate;
-            //stationTemp.YCoordinate = station.YCoordinate;
-
-            //UnitOfWork.StationRepository.Remove(station);
-            //// db.Stations.Remove(station);
-            //// db.SaveChanges();
-
-            UnitOfWork.StationRepository.EditStation(station, id);
-            UnitOfWork.StationRepository.SaveChanges();
-
-            Station stationTemp = UnitOfWork.StationRepository.Get(id);
-
-
-            return Ok(stationTemp);
+            if (UnitOfWork.StationRepository.EditStation(station, station.Version, id))
+            {
+                // UnitOfWork.StationRepository.EditStation(station, stationVersion, id);
+                UnitOfWork.StationRepository.SaveChanges();
+                return Ok(200);
+            }
+            else
+            {
+                return Ok(204);
+            }
         }
 
         protected override void Dispose(bool disposing)

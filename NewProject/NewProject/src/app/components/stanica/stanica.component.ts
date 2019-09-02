@@ -25,7 +25,8 @@ export class StanicaComponent implements OnInit {
     address : ['', Validators.required],
     xCoordinate : ['', Validators.required],
     yCoordinate : ['', Validators.required],
-    stations : ['',  Validators.required]
+    stations : ['',  Validators.required],
+    version : ['']
    });
 
    stations: Station[] = [];
@@ -36,6 +37,7 @@ export class StanicaComponent implements OnInit {
    markerInfo: MarkerInfo;
    selLine: Polyline;
    clicked: boolean = false;
+   stationVersion : any;
 
   constructor(private fb: FormBuilder, private stationService: StanicaService) { this.getStations();}
 
@@ -55,6 +57,9 @@ export class StanicaComponent implements OnInit {
       this.editOrRemoveStationForm.controls.address.setValue(s.Address);
       this.editOrRemoveStationForm.controls.xCoordinate.setValue(s.XCoordinate);
       this.editOrRemoveStationForm.controls.yCoordinate.setValue(s.YCoordinate);
+      this.editOrRemoveStationForm.controls.version.setValue(s.Version);
+      this.stationVersion = s.Version;
+      console.log(this.stationVersion);
     });
     this.findLines();
   }
@@ -78,12 +83,19 @@ export class StanicaComponent implements OnInit {
 
   deleteStation()
   {
-      this.stationService.deleteStation(this.selectValue).subscribe(
+      this.stationService.deleteStation(this.selectValue, this.stationVersion ).subscribe(
         d=>{
-          this.getStations();
-          window.alert("Stanica je uspesno obrisana " + this.selectValue);
-          this.selectValue = "";
-          this.editOrRemoveStationForm.reset();
+          if(d == 200)
+          {
+            this.getStations();
+            window.alert("Stanica je uspesno obrisana " + this.selectValue);
+            this.selectValue = "";
+            this.editOrRemoveStationForm.reset();
+          }
+          else
+          {
+            window.alert("Drugi admin je vec obrisao stanicu, molim vas refresujte stranicu");
+          }
         }
       );
   }
@@ -101,9 +113,20 @@ export class StanicaComponent implements OnInit {
   {
       this.stationService.editStation(this.editOrRemoveStationForm.value, this.selectValue).subscribe(
         data =>{
-          this.getStations();
-          window.alert("USPESNO MENJANJE STANICE SA ID: " + this.selectValue);
-          this.editOrRemoveStationForm.reset();
+          if(data == 200)
+          {
+
+            this.getStations();
+            window.alert("USPESNO MENJANJE STANICE SA ID: " + this.selectValue);
+            this.editOrRemoveStationForm.reset();
+          }
+          else if( data == 204){
+            window.alert("Drugi admin je vec promenio stanicu, molim vas refresujte stranicu");
+          }
+          else
+          {
+            window.alert("Drugi admin je vec promenio stanicu, molim vas refresujte stranicu"); 
+          }
         }
       );
      
