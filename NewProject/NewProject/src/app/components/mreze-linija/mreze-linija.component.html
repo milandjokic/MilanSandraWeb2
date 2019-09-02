@@ -1,13 +1,22 @@
 <div>
-    <div class="form-group">
-      <div class="col-sm-9 col-md-7 col-lg-3 mx-auto">
-        <br>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="shadow-lg">
+              <div class="card card-signin my-5">
+        <div class="card-body">
         <label>Linije</label>
+        <div class="form-label-group">
         <select class="form-control" name="selectedLine" (change)="onSelectLine($event)">
             <option *ngFor="let l of lines" [value] = "l.Id">{{l.LineName}}</option>
         </select>
       </div>
     </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
   <!--<span>Linije</span>
   <select name="selectedLine" (change)="onSelectLine($event)">
     <option *ngFor="let l of lines" [value] = "l.Id">{{l.LineName}}</option>

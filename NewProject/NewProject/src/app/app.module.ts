@@ -26,6 +26,7 @@ import { ValidacijaKorisnikaComponent } from './components/validacija-korisnika/
 import { ValidacijaKarataComponent } from './components/validacija-karata/validacija-karata.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { MrezeLinijaComponent } from './components/mreze-linija/mreze-linija.component';
+import { TrenutnaLokacijaComponent } from './components/trenutna-lokacija/trenutna-lokacija.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MrezeLinijaComponent } from './components/mreze-linija/mreze-linija.com
     RedvoznjeAdminComponent,
     ValidacijaKorisnikaComponent,
     ValidacijaKarataComponent,
-    MrezeLinijaComponent
+    MrezeLinijaComponent,
+    TrenutnaLokacijaComponent
   ],
   imports: [
     BrowserModule,

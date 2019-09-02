@@ -19,6 +19,7 @@ import { ControllerGuard } from './components/guards/controller.guard';
 import { UserGuard } from './components/guards/user.guard';
 import { NotRegisteredGuard } from './components/guards/not-registered.guard';
 import { ProfilGuard } from './components/guards/profil.guard';
+import { TrenutnaLokacijaComponent } from './components/trenutna-lokacija/trenutna-lokacija.component';
 
 const routes: Routes = [
   {
@@ -84,6 +85,11 @@ const routes: Routes = [
   {
     path: 'mreza-linija',
     component: MrezeLinijaComponent,
+    canActivate: [UserGuard]
+  },
+  {
+    path: 'trenutna-lokacija',
+    component: TrenutnaLokacijaComponent,
     canActivate: [UserGuard]
   }
 ];
